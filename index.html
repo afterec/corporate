@@ -122,6 +122,13 @@
   .ccol.com .cbig{color:var(--red-soft);text-shadow:0 0 34px rgba(249,0,0,.4)}
   .csub{display:block;font-size:.75rem;color:var(--ink-dim);line-height:1.5;margin-top:.4rem;max-width:24em}
   .csub em{font-style:normal;color:rgba(244,242,238,.45)}
+  .waves{width:100%}
+  .wlegend{display:flex;gap:1.4rem;margin-bottom:1.2rem}
+  .wl{font-size:.72rem;color:var(--ink-dim);display:flex;align-items:center;gap:.45rem;letter-spacing:.04em}
+  .wl i{width:9px;height:9px;border-radius:50%;display:inline-block}
+  .wl.red i{background:#f90000;box-shadow:0 0 10px rgba(249,0,0,.6)}
+  .wl.grey i{background:rgba(244,242,238,.55)}
+  .waves svg{width:100%;height:auto;display:block}
   .stem{border-left:1px dashed rgba(244,242,238,.3);margin:.7rem 0 0 5px}
   .ccol.sem .stem{height:24px}
   .ccol.com .stem{height:24px;border-color:var(--red-dim)}
@@ -188,6 +195,11 @@
   .media3 .m .fl.on{opacity:1}
   .split .media .fl{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity 1.2s ease}
   .split .media .fl.on{opacity:1}
+  .media-ev{position:absolute;inset:0;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .media-ev .m{position:relative;overflow:hidden;background:var(--bg-2)}
+  .media-ev .m .bgvideo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .media-ev .m .fl{position:absolute;inset:0;background-size:cover;background-position:center top;opacity:0;transition:opacity 1.2s ease}
+  .media-ev .m .fl.on{opacity:1}
   /* ---------- portátil com página em scroll + tour 360 (slide website) ---------- */
   .web-stack{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;background:var(--bg-2);padding:2rem 3vw}
   .t360{width:min(72%,520px);height:32%;background-size:cover;background-position:center;border-radius:8px;box-shadow:0 20px 60px rgba(0,0,0,.45)}
@@ -354,8 +366,8 @@
     <div class="num">02 · A AFTEREC</div>
     <div class="content">
       <div class="kicker">Quem somos</div>
-      <h2>Não fazemos «um vídeo institucional».<br><span class="oneline">Construímos a <em>mensagem</em> de uma marca.</span></h2>
-      <p class="body">A AfteREC é uma <strong>produtora de cinema</strong>. Produzimos conteúdos que <strong>prendem a atenção do espectador</strong>: através da narrativa, da escolha de planos, da iluminação e da direção de arte. Para cada organização, tornamos claro o que a oferta tem de único, numa peça visual que sustenta credibilidade e faz querer saber mais. Trabalhamos com <strong>organizações e marcas high-ticket</strong>, B2B e B2C, e estas peças <strong>reforçam a autoridade da marca e de quem a lidera</strong>.<br><br>Coordenamos os melhores profissionais para cada projeto e garantimos que tudo o que produzimos mantém um nível de qualidade elevado. O que pode esperar não é apenas a entrega de um vídeo: é a <strong>construção da mensagem comercial da sua organização</strong>, do guião à peça final, pronta a converter em todos os canais.</p>
+      <h2>Produção cinematográfica de <em>conteúdos corporativos</em>.</h2>
+      <p class="body">A AfteREC é uma <strong>produtora de cinema</strong>. Produzimos conteúdos que <strong>prendem a atenção do espectador</strong>: através da narrativa, da escolha de planos, da iluminação e da direção de arte do cinema. Para cada organização, tornamos claro o que a oferta tem de único, numa peça visual que sustenta credibilidade e faz querer saber mais. Trabalhamos com <strong>empresas B2B e B2C</strong>, reforçando através do audiovisual premium a <strong>autoridade da marca e de quem a lidera</strong>.<br><br>Coordenamos os melhores profissionais para cada projeto e tipo de conteúdo, e garantimos que tudo o que produzimos está ao nível de qualidade de que cada cliente precisa. O que pode esperar não é apenas a entrega de um vídeo: é a <strong>construção da mensagem comercial da sua organização em formato audiovisual</strong>, do guião à peça final, pronta a converter em todos os canais.</p>
     </div>
   </section>
 
@@ -364,47 +376,66 @@
     <div class="num">03 · O MERCADO</div>
     <div class="media">
       <div class="compare">
-        <div class="chart">
-          <div class="ccol sem">
-            <span class="cbig">63%</span>
-            <span class="csub">dos compradores preferem conhecer uma oferta <strong>em vídeo</strong>, não em texto</span>
-            <div class="stem"></div>
-            <div class="cbar"></div>
-            <ul>
-              <li>Sem uma peça central, a mensagem muda de call para call</li>
-              <li>O lead chega sem perceber a oferta</li>
-              <li>Ciclo de venda mais longo</li>
-            </ul>
+        <div class="waves">
+          <div class="wlegend">
+            <span class="wl red"><i></i>Vídeo digital</span>
+            <span class="wl grey"><i></i>TV tradicional</span>
           </div>
-          <div class="ccol com">
-            <span class="cbig">85%</span>
-            <span class="csub">dizem que <strong>um vídeo</strong> os convenceu a comprar um produto ou serviço</span>
-            <div class="stem"></div>
-            <div class="cbar"></div>
-            <ul>
-              <li>A oferta explica-se antes da conversa</li>
-              <li>Leads chegam qualificados à call</li>
-              <li>Ciclo de venda mais curto</li>
-            </ul>
-          </div>
+          <svg viewBox="0 0 720 470" role="img" aria-label="Tempo diário de atenção: o vídeo digital ultrapassa a TV tradicional em 2023">
+            <defs>
+              <linearGradient id="gRed" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#f90000" stop-opacity=".72"/>
+                <stop offset="1" stop-color="#f90000" stop-opacity="0"/>
+              </linearGradient>
+              <linearGradient id="gGrey" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#f4f2ee" stop-opacity=".38"/>
+                <stop offset="1" stop-color="#f4f2ee" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+            <g stroke="rgba(244,242,238,.09)" stroke-width="1">
+              <line x1="60" y1="100" x2="700" y2="100"/>
+              <line x1="60" y1="200" x2="700" y2="200"/>
+              <line x1="60" y1="300" x2="700" y2="300"/>
+            </g>
+            <g font-family="Archivo,Arial,sans-serif" font-size="13" fill="rgba(244,242,238,.35)">
+              <text x="34" y="104">4h</text>
+              <text x="34" y="204">3h</text>
+              <text x="34" y="304">2h</text>
+              <text x="60" y="462">2019</text>
+              <text x="365" y="462">2022</text>
+              <text x="672" y="462">2025</text>
+            </g>
+            <path d="M60,125 C100,113 130,108 167,110 C210,113 240,160 273,173 C310,187 345,184 380,187 C420,191 450,195 487,198 C525,201 555,204 593,208 C630,212 665,218 700,222 L700,440 L60,440 Z" fill="url(#gGrey)"/>
+            <path d="M60,125 C100,113 130,108 167,110 C210,113 240,160 273,173 C310,187 345,184 380,187 C420,191 450,195 487,198 C525,201 555,204 593,208 C630,212 665,218 700,222" fill="none" stroke="rgba(244,242,238,.55)" stroke-width="2"/>
+            <path d="M60,270 C95,245 130,218 167,210 C205,202 240,198 273,195 C310,192 345,192 380,190 C420,187 455,178 487,165 C525,150 560,130 593,117 C630,103 665,98 700,95 L700,440 L60,440 Z" fill="url(#gRed)"/>
+            <path d="M60,270 C95,245 130,218 167,210 C205,202 240,198 273,195 C310,192 345,192 380,190 C420,187 455,178 487,165 C525,150 560,130 593,117 C630,103 665,98 700,95" fill="none" stroke="#f90000" stroke-width="2.5" filter="drop-shadow(0 0 12px rgba(249,0,0,.45))"/>
+            <line x1="433" y1="192" x2="433" y2="330" stroke="rgba(244,242,238,.5)" stroke-width="1" stroke-dasharray="3 4"/>
+            <circle cx="433" cy="189" r="4.5" fill="#f4f2ee"/>
+            <g font-family="Archivo,Arial,sans-serif" font-size="13.5" fill="rgba(244,242,238,.72)">
+              <text x="447" y="348">Em 2023, o vídeo digital ultrapassou</text>
+              <text x="447" y="366">a TV no tempo diário de atenção.</text>
+              <text x="447" y="392">Em 2024: 3h50 de vídeo por dia,</text>
+              <text x="447" y="410">contra 2h55 de TV.</text>
+            </g>
+          </svg>
+          <p class="fonte">Fonte: eMarketer, tempo médio diário dos adultos nos EUA (2024). Wyzowl, State of Video Marketing.</p>
         </div>
-        <p class="fonte">Fonte: Wyzowl, State of Video Marketing (12 anos de dados).</p>
       </div>
     </div>
     <div class="text">
       <div class="kicker">Porque é que isto importa</div>
       <h2>Uma boa oferta, com uma mensagem confusa, <em>não converte</em>.</h2>
-      <p class="body">Muitas organizações têm um bom produto ou serviço, mas uma mensagem confusa, genérica ou espalhada por materiais que não batem certo entre si. O resultado sente-se no comercial: cada call começa por explicar o básico, os leads chegam sem perceber a oferta e o ciclo de venda arrasta-se.<br><br>Uma peça central com <strong>linguagem de cinema que ao mesmo tempo funciona online</strong> muda esse posicionamento: a oferta explica-se antes da conversa, quem chega à call chega qualificado e a equipa comercial gasta o tempo a fechar, não a explicar. E nós garantimos que tudo isto acontece.</p>
+      <p class="body">A atenção mudou de sítio: é em vídeo que os compradores passam o dia, e é em vídeo que esperam conhecer uma oferta. <strong>63% preferem conhecer uma oferta em vídeo, não em texto, e 85% dizem que um vídeo já os convenceu a comprar</strong> (Wyzowl). Quem continua a comunicar só com texto e materiais estáticos está a falar para onde a atenção já não está.<br><br>O resultado sente-se no comercial: cada call começa por explicar o básico, os leads chegam sem perceber a oferta e o ciclo de venda arrasta-se. Uma peça central com <strong>linguagem de cinema que ao mesmo tempo funciona online</strong> muda esse posicionamento: a oferta explica-se antes da conversa e quem chega à call chega qualificado.</p>
     </div>
   </section>
 
-  <!-- 04 · DOIS RETORNOS -->
+  <!-- 04 · PORQUÊ A AFTEREC -->
   <section class="slide statement" id="s4">
-    <div class="num">04 · O RETORNO</div>
+    <div class="num">04 · PORQUÊ A AFTEREC</div>
     <div class="content">
-      <div class="kicker">Um investimento, dois retornos</div>
-      <h2>Uma peça que serve <em>dois propósitos</em>.</h2>
-      <p class="body">A peça principal <strong>converte</strong>: explica a oferta, qualifica o lead e leva-o à ação no website, nos anúncios e no email. E, ao mesmo tempo, <strong>constrói a marca</strong>: uma organização que se apresenta com padrão de cinema sustenta credibilidade em cada contacto, da primeira visita ao fecho. O conteúdo não se esgota numa campanha: fica como o ativo central da comunicação comercial, a trabalhar em todos os canais.</p>
+      <div class="kicker">Porquê trabalhar connosco</div>
+      <h2>Os melhores profissionais, <em>para cada tipo de conteúdo</em>.</h2>
+      <p class="body">Produzir conteúdos para uma empresa costuma correr da mesma forma: a mesma equipa para projetos diferentes, qualidade que varia de projeto para projeto e um resultado genérico que fica aquém do prometido. Nós resolvemos esse problema pela raiz: para cada projeto, <strong>montamos a equipa certa, escolhida pelo tipo de conteúdo que a sua empresa precisa</strong>, procurando entre os melhores profissionais do mundo, não apenas os que estão perto: se o filmmaker certo para o seu projeto estiver noutro país, é com ele que trabalha. O que importa é a qualidade e o resultado, e dirigimos essa equipa com o padrão do cinema, do guião à peça final, para que quem se preocupa com a qualidade a tenha garantida, sem ter de a gerir.<br><br>E o investimento devolve em duas frentes: a peça <strong>converte</strong>, explica a oferta e leva o lead à ação, e ao mesmo tempo <strong>constrói a marca</strong>, com um padrão de imagem que sustenta credibilidade em cada contacto. Antes sequer de escrever o guião, definimos para que plataformas e locais o conteúdo vai, porque cada público é um público: a peça nasce pensada para o destino.</p>
       <div class="ramify" style="justify-content:center">
         <span class="chip">Website / Landing</span>
         <span class="chip">LinkedIn</span>
@@ -422,20 +453,17 @@
       <h2>Os conteúdos que constroem a <em>imagem da sua empresa</em>.</h2>
       <div class="menu-cols">
         <div class="menu-col">
-          <h3>As peças</h3>
+          <h3>Vídeo</h3>
           <ul>
             <li><a href="#s7">Vídeo institucional</a></li>
             <li><a href="#s7b">VSL, o vídeo de vendas</a></li>
-            <li><a href="#s9">Filmagens de eventos</a></li>
-            <li><a href="#s9">Fotografia de equipa</a></li>
           </ul>
         </div>
         <div class="menu-col">
-          <h3>O que está por trás</h3>
+          <h3>Eventos e fotografia</h3>
           <ul>
-            <li><a href="#s6">Guião e estrutura de mensagem</a></li>
-            <li><a href="#s8">Captação cinematográfica e direção de arte</a></li>
-            <li><a href="#s10">Versões por canal e para redes</a></li>
+            <li><a href="#s9">Filmagens de eventos</a></li>
+            <li><a href="#s9">Fotografia de equipa</a></li>
           </ul>
         </div>
       </div>
@@ -443,29 +471,14 @@
     </div>
   </section>
 
-  <!-- 06 · GUIÃO -->
-  <section class="slide split" id="s6">
-    <div class="num">06 · GUIÃO</div>
-    <a class="back" href="#s5">← O que entregamos</a>
-    <div class="text">
-      <div class="kicker">Guião e estrutura de mensagem</div>
-      <h2>70% do resultado <em>escreve-se antes de filmar</em>.</h2>
-      <p class="body">Tudo começa na escrita: um guião orientado a clareza e retenção, e uma estrutura de mensagem que organiza o que a sua organização faz, para quem e porquê. Este documento vale para além do vídeo: serve de alinhamento interno e passa a ser a fonte da mensagem em todos os materiais comerciais.<br><br>É a fase com mais peso no resultado final e é o portão da produção: <strong>nenhuma rodagem avança sem o guião aprovado por escrito</strong>. É isto que garante que a peça final diz exatamente o que precisa de dizer.</p>
-    </div>
-    <div class="media">
-      <div class="bgimg" style="background-image:url('img/06-guiao.jpg')"></div>
-      <div class="grad"></div>
-    </div>
-  </section>
-
-  <!-- 07 · VÍDEO INSTITUCIONAL -->
+  <!-- 06 · VÍDEO INSTITUCIONAL -->
   <section class="slide split" id="s7">
-    <div class="num">07 · INSTITUCIONAL</div>
+    <div class="num">06 · INSTITUCIONAL</div>
     <a class="back" href="#s5">← O que entregamos</a>
     <div class="text">
       <div class="kicker">Vídeo institucional</div>
       <h2>Não é um vídeo corporativo. É um <em>filme</em>.</h2>
-      <p class="body">A peça principal da comunicação da sua organização, produzida com as exigências de cinema: equipa com realização, direção de fotografia, som e direção de arte, e pós-produção com correção de cor e intenção editorial: progressão narrativa, ritmo e a história certa para a audiência certa.<br><br>Apresenta a organização, o produto ou o serviço com a credibilidade que o mercado high-ticket exige. E diz muito sobre quem o apresenta: uma marca que comunica com este padrão mostra que leva a sério aquilo que vende.</p>
+      <p class="body">A peça principal da comunicação da sua organização, produzida com as exigências de cinema: equipa com realização, direção de fotografia, som e direção de arte, e pós-produção com correção de cor e intenção editorial: progressão narrativa, ritmo e a história certa para a audiência certa. Tudo começa no guião, onde se decide 70% do resultado: <strong>nenhuma rodagem avança sem o guião aprovado por escrito</strong>.<br><br>Apresenta a organização, o produto ou o serviço com a credibilidade que o mercado high-ticket exige. E diz muito sobre quem o apresenta: uma marca que comunica com este padrão mostra que leva a sério aquilo que vende. No fim, recebe o master em máxima qualidade e as versões preparadas para cada canal, do website ao LinkedIn.</p>
     </div>
     <div class="media">
       <video class="bgvideo" autoplay muted loop playsinline poster="img/07-institucional.jpg">
@@ -475,9 +488,9 @@
     </div>
   </section>
 
-  <!-- 08 · VSL -->
+  <!-- 07 · VSL -->
   <section class="slide split rev" id="s7b">
-    <div class="num">08 · VSL</div>
+    <div class="num">07 · VSL</div>
     <a class="back" href="#s5">← O que entregamos</a>
     <div class="media">
       <video class="bgvideo" autoplay muted loop playsinline poster="img/07b-vsl.jpg">
@@ -488,80 +501,43 @@
     <div class="text">
       <div class="kicker">VSL, o vídeo de vendas</div>
       <h2>A oferta explicada, <em>antes da primeira call</em>.</h2>
-      <p class="body">O VSL (Video Sales Letter) é um tipo de vídeo institucional com um objetivo único: <strong>converter</strong>. Percorre o problema, a solução e a prova, e termina numa chamada para ação clara, no website, numa landing page ou numa sequência de email.<br><br>É a peça que responde às perguntas que a equipa comercial repete em todas as calls: quando o lead chega à conversa, já percebeu a oferta, e a conversa começa mais à frente. Menos fricção comercial, leads mais qualificados e um ciclo de venda mais curto.</p>
+      <p class="body">O VSL (Video Sales Letter) é um tipo de vídeo institucional com um objetivo único: <strong>converter</strong>. Percorre o problema, a solução e a prova, e termina numa chamada para ação clara, no website, numa landing page ou numa sequência de email. O guião escreve-se orientado à conversão e é aprovado por si antes de qualquer filmagem.<br><br>É a peça que responde às perguntas que a equipa comercial repete em todas as calls: quando o lead chega à conversa, já percebeu a oferta, e a conversa começa mais à frente. Menos fricção comercial, leads mais qualificados e um ciclo de venda mais curto.</p>
     </div>
   </section>
 
-  <!-- 09 · EVENTOS E FOTOGRAFIA DE EQUIPA -->
+  <!-- 08 · EVENTOS E FOTOGRAFIA DE EQUIPA -->
   <section class="slide split" id="s9">
-    <div class="num">09 · EVENTOS &amp; FOTOGRAFIA</div>
+    <div class="num">08 · EVENTOS &amp; FOTOGRAFIA</div>
     <a class="back" href="#s5">← O que entregamos</a>
     <div class="text">
       <div class="kicker">Filmagens de eventos e fotografia de equipa</div>
       <h2>Os momentos e as pessoas, <em>com o mesmo padrão</em>.</h2>
       <p class="body">Nem tudo é a peça principal. Filmamos os eventos da sua organização, conferências, lançamentos, encontros de equipa, com a mesma linguagem cinematográfica: um aftermovie que fica e registos prontos a publicar. E fazemos a fotografia de equipa e os retratos profissionais que apresentam quem lidera e quem faz, no website, no LinkedIn e nos materiais comerciais.<br><br>É o mesmo cuidado aplicado a tudo o que representa a empresa: cada conteúdo que circula com o seu nome está a construir, ou a desgastar, a imagem da marca. O nosso trabalho é garantir que a constrói.</p>
     </div>
-    <div class="media fadeset">
-      <div class="fl on" style="background-image:url('img/09-eventos.jpg');z-index:1"></div>
-      <div class="fl" style="background-image:url('img/09-equipa.jpg')"></div>
+    <div class="media">
+      <div class="media-ev">
+        <div class="m">
+          <video class="bgvideo" autoplay muted loop playsinline poster="img/09-recap.jpg">
+            <source src="video/09-recap.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="m fadeset">
+          <div class="fl on" style="background-image:url('img/09-ev-a.jpg');z-index:1"></div>
+          <div class="fl" style="background-image:url('img/09-ev-b.jpg')"></div>
+          <div class="fl" style="background-image:url('img/09-ev-c.jpg')"></div>
+          <div class="fl" style="background-image:url('img/09-ev-d.jpg')"></div>
+          <div class="fl" style="background-image:url('img/09-ev-e.jpg')"></div>
+          <div class="fl" style="background-image:url('img/09-ev-f.jpg')"></div>
+        </div>
+      </div>
       <div class="grad" style="z-index:500"></div>
     </div>
   </section>
 
-  <!-- 10 · CAPTAÇÃO E DIREÇÃO DE ARTE -->
-  <section class="slide split" id="s8">
-    <div class="num">10 · RODAGEM</div>
-    <a class="back" href="#s5">← O que entregamos</a>
-    <div class="text">
-      <div class="kicker">Captação cinematográfica e direção de arte</div>
-      <h2>Um ou dois dias de rodagem, <em>planeados ao detalhe</em>.</h2>
-      <p class="body">A captação faz-se em um dia (Base e Cinema) ou dois dias e uma noite (Personalizado), num local preparado com antecedência: checklist de preparação do espaço, folha de serviço e intervenientes confirmados. Dirigimos as pessoas da sua organização em câmara, com guias técnicos de apoio para quem fala.<br><br>No pacote Cinema entra a <strong>direção de arte</strong>: o espaço, os adereços e os detalhes visuais são trabalhados para um look mais próximo de cinema, o tratamento que separa uma peça premium de um institucional genérico.</p>
-    </div>
-    <div class="media">
-      <div class="bgimg" style="background-image:url('img/08-rodagem.jpg')"></div>
-      <div class="grad"></div>
-    </div>
-  </section>
 
-  <!-- 11 · VERSÕES POR CANAL -->
-  <section class="slide split rev" id="s10">
-    <div class="num">11 · CANAIS</div>
-    <a class="back" href="#s5">← O que entregamos</a>
-    <div class="media">
-      <div class="web-stack">
-        <div class="laptop">
-          <div class="screen"><img class="page" src="img/10-website-page.jpg" alt="Landing page com a peça principal"></div>
-          <div class="base"></div>
-        </div>
-        <div class="t360" style="background-image:url('img/10-formatos.jpg')"></div>
-      </div>
-      <div class="grad"></div>
-    </div>
-    <div class="text">
-      <div class="kicker">Versões por canal</div>
-      <h2>Uma peça, <em>pronta para cada canal</em>.</h2>
-      <p class="body">Antes sequer de escrever o guião, definimos para que plataformas e locais o conteúdo vai, porque cada público é um público: o que prende no LinkedIn não é o que convence no website. A entrega reflete isso: o master em máxima qualidade mais exports preparados para cada destino, com instrução de uso para saber exatamente qual ficheiro vai para onde.<br><br>O mesmo vídeo comprimido à pressa para todos os canais perde qualidade algures; as versões por canal garantem que a peça se apresenta no seu melhor em todo o lado. Junto segue a estrutura de mensagem, para a sua equipa usar em qualquer material futuro.</p>
-    </div>
-  </section>
-
-  <!-- 12 · VERSÕES CURTAS PARA REDES -->
-  <section class="slide split" id="s11">
-    <div class="num">12 · REDES SOCIAIS</div>
-    <a class="back" href="#s5">← O que entregamos</a>
-    <div class="text">
-      <div class="kicker">Versões curtas para redes sociais</div>
-      <h2>A mensagem, <em>multiplicada</em>.</h2>
-      <p class="body">Quando faz sentido distribuir além do canal principal, criamos versões curtas da peça: reels, stories e shorts que levam a mesma mensagem às redes sociais, com cortes pensados para prender nos primeiros segundos.<br><br>E quando a organização não tem estrutura de marketing própria, envolvemos parceiros de marketing para criar o conceito e a distribuição, orçamentado caso a caso, para que a peça não fique parada num website.</p>
-    </div>
-    <div class="media">
-      <div class="bgimg" style="background-image:url('img/11-redes.jpg')"></div>
-      <div class="grad"></div>
-    </div>
-  </section>
-
-  <!-- 13 · PROCESSO -->
+  <!-- 09 · PROCESSO -->
   <section class="slide process" id="s12">
-    <div class="num">13 · PROCESSO</div>
+    <div class="num">09 · PROCESSO</div>
     <div class="content">
       <div class="kicker">Como trabalhamos</div>
       <h2>Um processo, uma equipa especializada, <em>um prazo</em>.</h2>
@@ -578,9 +554,9 @@
     </div>
   </section>
 
-  <!-- 14 · PACOTES -->
+  <!-- 10 · PACOTES -->
   <section class="slide pacotes" id="s13">
-    <div class="num">14 · PACOTES</div>
+    <div class="num">10 · PACOTES</div>
     <div class="content">
       <div class="kicker">Pacotes</div>
       <h2>Três pontos de partida, <em>um pacote à medida</em>.</h2>
@@ -624,7 +600,7 @@
     </div>
   </section>
 
-  <!-- 15 · CTA -->
+  <!-- 11 · CTA -->
   <section class="slide statement cta" id="s14">
     <div class="content">
       <h2>A sua oferta merece ser <em>entendida</em>.</h2>
@@ -725,19 +701,15 @@
   const L10N_MAP={
     's1.sub':'#s1 .sub',
     'n2':'#s2 .num','s2.k':'#s2 .kicker','s2.h':'#s2 h2','s2.b':'#s2 p.body',
-    'n3':'#s3 .num','s3.sem':'#s3 .ccol.sem .csub','s3.semlist':'#s3 .ccol.sem ul','s3.com':'#s3 .ccol.com .csub','s3.comlist':'#s3 .ccol.com ul','s3.fonte':'#s3 .fonte','s3.k':'#s3 .kicker','s3.h':'#s3 h2','s3.b':'#s3 .text p.body',
+    'n3':'#s3 .num','s3.fonte':'#s3 .fonte','s3.k':'#s3 .kicker','s3.h':'#s3 h2','s3.b':'#s3 .text p.body',
     'n4':'#s4 .num','s4.k':'#s4 .kicker','s4.h':'#s4 h2','s4.b':'#s4 p.body','s4.c1':'#s4 .ramify .chip:nth-child(1)','s4.c2':'#s4 .ramify .chip:nth-child(2)','s4.c3':'#s4 .ramify .chip:nth-child(3)','s4.c4':'#s4 .ramify .chip:nth-child(4)',
     'n5':'#s5 .num','s5.k':'#s5 .kicker','s5.h':'#s5 h2','s5.c1':'#s5 .menu-col:nth-child(1) h3','s5.c2':'#s5 .menu-col:nth-child(2) h3',
     's5.m1':'#s5 .menu-col:nth-child(1) li:nth-child(1) a','s5.m2':'#s5 .menu-col:nth-child(1) li:nth-child(2) a','s5.m3':'#s5 .menu-col:nth-child(1) li:nth-child(3) a','s5.m4':'#s5 .menu-col:nth-child(1) li:nth-child(4) a',
     's5.m5':'#s5 .menu-col:nth-child(2) li:nth-child(1) a','s5.m6':'#s5 .menu-col:nth-child(2) li:nth-child(2) a','s5.m7':'#s5 .menu-col:nth-child(2) li:nth-child(3) a',
     's5.note':'#s5 .menu-note',
-    'n6':'#s6 .num','s6.k':'#s6 .kicker','s6.h':'#s6 h2','s6.b':'#s6 p.body',
     'n7':'#s7 .num','s7.k':'#s7 .kicker','s7.h':'#s7 h2','s7.b':'#s7 p.body',
     'n7b':'#s7b .num','s7b.k':'#s7b .kicker','s7b.h':'#s7b h2','s7b.b':'#s7b p.body',
-    'n8':'#s8 .num','s8.k':'#s8 .kicker','s8.h':'#s8 h2','s8.b':'#s8 p.body',
     'n9':'#s9 .num','s9.k':'#s9 .kicker','s9.h':'#s9 h2','s9.b':'#s9 p.body',
-    'n10':'#s10 .num','s10.k':'#s10 .kicker','s10.h':'#s10 h2','s10.b':'#s10 p.body',
-    'n11':'#s11 .num','s11.k':'#s11 .kicker','s11.h':'#s11 h2','s11.b':'#s11 p.body',
     'n12':'#s12 .num','s12.k':'#s12 .kicker','s12.h':'#s12 h2','s12.st1':'#s12 .step:nth-child(1)','s12.st2':'#s12 .step:nth-child(2)','s12.st3':'#s12 .step:nth-child(3)','s12.st4':'#s12 .step:nth-child(4)','s12.st5':'#s12 .step:nth-child(5)','s12.st6':'#s12 .step:nth-child(6)','s12.badge':'#s12 .badge','s12.b':'#s12 p.body',
     'n13':'#s13 .num','s13.k':'#s13 .kicker','s13.h':'#s13 h2','s13.tag':'#s13 .pk .tag','s13.p1l':'#s13 .pk:nth-child(1) ul','s13.p1q':'#s13 .pk:nth-child(1) .quem','s13.p2l':'#s13 .pk:nth-child(2) ul','s13.p2q':'#s13 .pk:nth-child(2) .quem','s13.p3l':'#s13 .pk:nth-child(3) ul','s13.p3q':'#s13 .pk:nth-child(3) .quem','s13.note':'#s13 .pk-note',
     's14.h':'#s14 h2','s14.b':'#s14 p.body','s14.btn':'#s14 .btn'
