@@ -1,0 +1,1288 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AfteREC Corporate — Apresentação do Serviço</title>
+<link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+<link rel="icon" type="image/png" sizes="64x64" href="img/favicon.png">
+<link rel="apple-touch-icon" href="img/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#161618;
+    --bg-2:#1e1e21;
+    --ink:#f4f2ee;
+    --ink-dim:#b6b3ad;
+    --red:#f90000;
+    --red-soft:#ff3b30;
+    --red-dim:rgba(249,0,0,.4);
+    --serif:'Cormorant Garamond',Georgia,serif;
+    --sans:'Inter',-apple-system,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);color:var(--ink);
+    font-family:var(--sans);font-weight:300;
+    overflow-x:hidden;
+  }
+  main{
+    height:100vh;overflow-y:scroll;
+    scroll-snap-type:y mandatory;
+  }
+  section.slide{
+    height:100vh;width:100%;
+    scroll-snap-align:start;scroll-snap-stop:always;
+    position:relative;display:flex;align-items:center;justify-content:center;
+    overflow:hidden;
+  }
+  .kicker{
+    font-family:var(--sans);font-size:.72rem;font-weight:500;
+    letter-spacing:.32em;text-transform:uppercase;color:var(--red-soft);
+    margin-bottom:1.6rem;
+  }
+  h1,h2{font-family:var(--serif);font-weight:300;line-height:1.08}
+  h1{font-size:clamp(2.8rem,6.2vw,5.4rem)}
+  h2{font-size:clamp(2rem,4.2vw,3.6rem);margin-bottom:1.6rem}
+  h2 em{font-style:italic;color:var(--red-soft)}
+  p.body{
+    font-size:clamp(.95rem,1.25vw,1.12rem);line-height:1.75;
+    color:var(--ink-dim);max-width:36em;
+  }
+  p.body strong{color:var(--ink);font-weight:400}
+  .num{
+    position:absolute;top:2.4rem;left:3rem;z-index:5;
+    font-family:var(--sans);font-size:.7rem;letter-spacing:.25em;
+    color:rgba(244,242,238,.4);
+  }
+  /* ---------- botão voltar ao menu de conteúdos ---------- */
+  a.back{
+    position:absolute;top:2.2rem;right:3rem;z-index:6;
+    font-family:var(--sans);font-size:.68rem;font-weight:500;
+    letter-spacing:.18em;text-transform:uppercase;
+    color:var(--ink-dim);text-decoration:none;
+    border:1px solid rgba(244,242,238,.2);border-radius:2rem;
+    padding:.55rem 1.2rem;background:rgba(22,22,24,.55);backdrop-filter:blur(4px);
+    transition:color .2s,border-color .2s;
+  }
+  a.back:hover{color:var(--red-soft);border-color:var(--red-dim)}
+  /* ---------- hero (capa + final) ---------- */
+  .hero .bgimg{position:absolute;inset:0;background-size:cover;background-position:center;}
+  .hero .veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(22,22,24,.3) 0%,rgba(22,22,24,.55) 55%,rgba(22,22,24,.92) 100%)}
+  .hero .content{position:relative;z-index:2;text-align:center;padding:0 6vw}
+  .hero h1,.hero h2,.hero .sub,.hero p.body{text-shadow:0 2px 28px rgba(0,0,0,.65)}
+  .rule{width:56px;height:1px;background:var(--red);margin:2.2rem auto}
+  .hero .sub{font-family:var(--serif);font-style:italic;font-size:clamp(1.1rem,2vw,1.6rem);color:var(--ink)}
+  /* capa: alinhada à esquerda e ao topo, sobre o céu, com animação de entrada */
+  section.slide.capa{align-items:flex-start}
+  .capa .veil{background:linear-gradient(90deg,rgba(22,22,24,.78) 0%,rgba(22,22,24,.38) 42%,rgba(22,22,24,.04) 72%),linear-gradient(180deg,transparent 55%,rgba(22,22,24,.82) 100%)}
+  .capa .content{width:100%;max-width:1280px;padding:0 7vw;text-align:left;margin-top:9vh}
+  @keyframes fadeup{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+  .capa .logo,.capa h1,.capa .rule,.capa .sub{opacity:0;animation:fadeup .9s ease forwards}
+  .capa .logo{animation-delay:.15s}
+  .capa h1{animation-delay:.45s}
+  .capa .rule{animation-delay:.7s}
+  .capa .sub{animation-delay:.9s}
+  .capa .logo{width:min(280px,46vw);height:auto;display:block;margin:0 0 .9rem}
+  .capa h1{
+    font-family:var(--sans);font-weight:400;
+    font-size:clamp(.95rem,1.6vw,1.35rem);
+    letter-spacing:.58em;text-transform:uppercase;color:var(--ink);
+    margin-left:.15em;
+  }
+  .capa .rule{margin:2rem 0}
+  /* ---------- split layout ---------- */
+  /* section.slide (flex) tem especificidade maior que .split; este seletor garante o grid.
+     align-items:stretch é obrigatório: o center herdado do slide colapsa o painel de media
+     (que só tem filhos absolutos) para altura zero. */
+  section.slide.split{display:grid;grid-template-columns:47% 53%;grid-template-rows:100%;align-items:stretch;justify-content:stretch;width:100%;height:100%}
+  .split .text{
+    display:flex;flex-direction:column;justify-content:center;
+    padding:0 4.5vw;background:var(--bg);
+  }
+  .split .media{position:relative;background:var(--bg-2)}
+  .split .media .bgimg{position:absolute;inset:0;background-size:cover;background-position:center}
+  .split .media .bgvideo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .split .media .grad{position:absolute;inset:0;background:linear-gradient(90deg,var(--bg) 0%,transparent 18%)}
+  section.slide.split.rev{grid-template-columns:53% 47%}
+  .split.rev .media .grad{background:linear-gradient(270deg,var(--bg) 0%,transparent 18%)}
+  /* ---------- painel comparativo (slide 3), gráfico estilo referência ---------- */
+  .compare{
+    position:absolute;inset:0;background:var(--bg-2);
+    display:flex;flex-direction:column;justify-content:center;
+    padding:0 3.4vw;
+  }
+  .chart{display:grid;grid-template-columns:1fr 1.15fr;gap:2.6rem;align-items:end;width:100%}
+  .ccol{display:flex;flex-direction:column;justify-content:flex-end}
+  .cbig{font-family:var(--sans);font-weight:300;display:block;font-size:clamp(2rem,3.4vw,3.2rem);line-height:1;letter-spacing:-.01em}
+  .ccol.sem .cbig{color:var(--ink-dim)}
+  .ccol.com .cbig{color:var(--red-soft);text-shadow:0 0 34px rgba(249,0,0,.4)}
+  .csub{display:block;font-size:.75rem;color:var(--ink-dim);line-height:1.5;margin-top:.4rem;max-width:24em}
+  .csub em{font-style:normal;color:rgba(244,242,238,.45)}
+  .stem{border-left:1px dashed rgba(244,242,238,.3);margin:.7rem 0 0 5px}
+  .ccol.sem .stem{height:24px}
+  .ccol.com .stem{height:24px;border-color:var(--red-dim)}
+  .cbar{width:100%;clip-path:polygon(0 0,74% 0,100% 26%,100% 100%,0 100%)}
+  .ccol.sem .cbar{height:170px;background:linear-gradient(180deg,rgba(244,242,238,.85) 0,rgba(244,242,238,.22) 4px,rgba(244,242,238,0) 100%)}
+  .fonte{margin-top:1.6rem;font-size:.72rem;color:rgba(244,242,238,.45)}
+  .ccol.com .cbar{height:236px;background:linear-gradient(180deg,#f90000 0,rgba(249,0,0,.45) 5px,rgba(249,0,0,0) 100%);filter:drop-shadow(0 -6px 30px rgba(249,0,0,.3))}
+  .ccol ul{list-style:none;margin-top:1.2rem;display:flex;flex-direction:column;gap:.45rem}
+  .ccol li{font-size:.78rem;line-height:1.5;color:var(--ink-dim);padding-left:.9rem;position:relative}
+  .ccol li:before{content:'·';position:absolute;left:0;color:var(--red-soft)}
+  .ccol.sem li:before{color:var(--ink-dim)}
+  /* ---------- full-bleed statement ---------- */
+  .statement{background:var(--bg)}
+  .statement .content{max-width:1040px;padding:0 2rem;text-align:center}
+  .statement p.body{margin:0 auto}
+  .oneline{white-space:nowrap}
+  @media(max-width:900px){.oneline{white-space:normal}}
+  /* ---------- menu slide ---------- */
+  .menu-wrap{max-width:1080px;width:100%;padding:0 6vw}
+  .menu-cols{display:grid;grid-template-columns:1fr 1fr;gap:4rem;margin-top:2.5rem}
+  .menu-col h3{
+    font-family:var(--sans);font-size:.72rem;font-weight:600;
+    letter-spacing:.3em;text-transform:uppercase;color:var(--red-soft);
+    margin-bottom:1.4rem;
+  }
+  .menu-col ul{list-style:none}
+  .menu-col li{border-bottom:1px solid rgba(244,242,238,.09)}
+  .menu-col li a{
+    font-family:var(--sans);font-weight:400;
+    font-size:clamp(.92rem,1.15vw,1.06rem);letter-spacing:.02em;
+    padding:.75rem 0;color:var(--ink);text-decoration:none;
+    display:flex;justify-content:space-between;align-items:baseline;
+    transition:color .2s,padding-left .2s;
+  }
+  .menu-col li a:after{
+    content:'→';font-size:.85rem;color:var(--red-dim);
+    opacity:0;transition:opacity .2s;
+  }
+  .menu-col li a:hover{color:var(--red-soft);padding-left:.4rem}
+  .menu-col li a:hover:after{opacity:1}
+  .menu-note{margin-top:2.6rem;color:var(--ink-dim);font-size:clamp(.9rem,1.1vw,1rem);line-height:1.7}
+  .menu-note a{color:var(--red-soft);text-decoration:none;border-bottom:1px solid var(--red-dim)}
+  /* ---------- photo grid slide ---------- */
+  .gridslide{flex-direction:column;background:var(--bg)}
+  .gridslide .head{width:100%;max-width:1200px;padding:0 6vw;margin-bottom:2rem}
+  .photogrid{
+    display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:10px;
+    width:100%;max-width:1200px;padding:0 6vw;height:52vh;
+  }
+  .photogrid .ph{background-size:cover;background-position:center;background-color:var(--bg-2)}
+  .photogrid .ph:first-child{grid-row:span 2}
+  .photogrid .ph:nth-child(4){grid-column:span 2}
+  /* ---------- grelha redes sociais (FPV vertical largo + foto aérea + 2 time-lapses) ---------- */
+  .media4{position:absolute;inset:0;display:grid;grid-template-columns:.85fr 1fr;grid-template-rows:1fr 1fr 1fr;gap:10px}
+  .media4 .m{background-size:cover;background-position:center;background-color:var(--bg-2);position:relative;overflow:hidden}
+  .media4 .m.big{grid-row:span 3}
+  .media4 .m .bgvideo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  /* ---------- grelha 3D (vídeo + 2 renders) ---------- */
+  .media3{position:absolute;inset:0;display:grid;grid-template-columns:1.35fr 1fr;grid-template-rows:1fr 1fr;gap:10px}
+  .media3 .m{background-size:cover;background-position:center;background-color:var(--bg-2);position:relative;overflow:hidden}
+  .media3 .m.big{grid-row:span 2}
+  .media3 .m .bgvideo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .media3 .m .fl{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity 1.2s ease}
+  .media3 .m .fl.on{opacity:1}
+  /* ---------- portátil com página em scroll + tour 360 (slide website) ---------- */
+  .web-stack{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;background:var(--bg-2);padding:2rem 3vw}
+  .t360{width:min(72%,520px);height:32%;background-size:cover;background-position:center;border-radius:8px;box-shadow:0 20px 60px rgba(0,0,0,.45)}
+  .laptop{width:min(72%,520px)}
+  .laptop .screen{aspect-ratio:16/10;overflow:hidden;border:10px solid #08080a;border-radius:12px 12px 0 0;background:#000;box-shadow:0 30px 80px rgba(0,0,0,.55)}
+  .laptop .screen .page{display:block;width:100%;will-change:transform;animation:pagescroll 26s ease-in-out infinite alternate}
+  @keyframes pagescroll{0%,6%{transform:translate3d(0,0,0)}94%,100%{transform:translate3d(0,-64%,0)}}
+  .laptop .base{height:15px;width:114%;margin-left:-7%;background:linear-gradient(180deg,#232326,#0a0a0c);border-radius:2px 2px 14px 14px}
+  /* ---------- dual media (drone + reel) ---------- */
+  .dual .media2{display:grid;grid-template-columns:1fr .62fr;gap:10px;position:absolute;inset:0;padding:0}
+  .dual .m{background-size:cover;background-position:center;background-color:var(--bg-2);position:relative;overflow:hidden}
+  .dual .m .bgvideo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  /* ---------- process ---------- */
+  .process .content{max-width:1080px;width:100%;padding:0 6vw}
+  .timeline{display:grid;grid-template-columns:repeat(6,1fr);gap:0;margin:3rem 0 2.4rem;position:relative}
+  .timeline:before{content:'';position:absolute;top:7px;left:2%;right:2%;height:1px;background:var(--red-dim)}
+  .step{position:relative;padding:2rem 1.2rem 0 0}
+  .step:before{content:'';position:absolute;top:0;left:0;width:15px;height:15px;border-radius:50%;border:1px solid var(--red-soft);background:var(--bg)}
+  .step h4{font-family:var(--serif);font-weight:400;font-size:1.35rem;margin-bottom:.5rem}
+  .step p{font-size:.8rem;line-height:1.6;color:var(--ink-dim)}
+  .badge{
+    display:inline-block;border:1px solid var(--red-dim);border-radius:1.4rem;
+    padding:.6rem 1.6rem;font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:var(--red-soft);
+    text-align:center;line-height:1.5;
+  }
+  .badge small{display:block;font-size:.6rem;letter-spacing:.16em;color:var(--ink-dim)}
+  /* ---------- pacotes ---------- */
+  .pacotes .content{max-width:1180px;width:100%;padding:0 5vw}
+  .pk-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:2.6rem;max-width:960px}
+  .pk{
+    border:1px solid rgba(244,242,238,.13);border-radius:4px;
+    padding:1.8rem 1.5rem;display:flex;flex-direction:column;gap:1rem;
+    background:var(--bg-2);position:relative;
+  }
+  .pk.destaque{border-color:var(--red-dim)}
+  .pk .tag{
+    position:absolute;top:-.7rem;right:1rem;
+    background:var(--red);color:#fff;border-radius:2rem;
+    font-size:.62rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+    padding:.3rem .8rem;
+  }
+  .pk li strong{color:var(--ink);font-weight:500}
+  .pk h4{font-family:var(--serif);font-weight:400;font-size:1.55rem}
+  .pk .preco{font-family:var(--sans);font-size:.92rem;font-weight:500;color:var(--red-soft);letter-spacing:.04em}
+  .pk ul{list-style:none;display:flex;flex-direction:column;gap:.55rem}
+  .pk li{font-size:.82rem;line-height:1.5;color:var(--ink-dim);padding-left:1rem;position:relative}
+  .pk li:before{content:'·';position:absolute;left:0;color:var(--red-soft)}
+  .pk .quem{margin-top:auto;font-size:.72rem;letter-spacing:.06em;color:rgba(244,242,238,.45);font-style:italic}
+  .pk-note{margin-top:2.2rem;font-size:.85rem;line-height:1.7;color:var(--ink-dim);max-width:52em}
+  .pk-note a{color:var(--red-soft);text-decoration:none;border-bottom:1px solid var(--red-dim)}
+  /* ---------- ramify (slide 4) ---------- */
+  .ramify{display:flex;gap:1rem;flex-wrap:wrap;margin-top:2.4rem}
+  .chip{
+    border:1px solid rgba(244,242,238,.16);border-radius:2rem;
+    padding:.5rem 1.2rem;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-dim);
+  }
+  /* ---------- CTA final ---------- */
+  .cta .veil{background:linear-gradient(180deg,rgba(22,22,24,.55) 0%,rgba(22,22,24,.75) 50%,rgba(22,22,24,.94) 100%)}
+  .cta .content{position:relative;z-index:2;text-align:center;padding:0 6vw;max-width:860px}
+  .btn{
+    display:inline-block;margin-top:2.6rem;
+    background:var(--red);color:#fff;text-decoration:none;
+    font-family:var(--sans);font-weight:500;font-size:.8rem;
+    letter-spacing:.22em;text-transform:uppercase;
+    padding:1.1rem 2.8rem;border-radius:2px;
+    transition:opacity .25s;
+  }
+  .btn:hover{opacity:.85}
+  .contacts{margin-top:2.8rem;font-size:.85rem;letter-spacing:.06em;color:var(--ink-dim);line-height:2}
+  .contacts a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--red-dim)}
+  /* ---------- seta de continuar ---------- */
+  a.downarrow{
+    position:fixed;bottom:1.6rem;left:50%;transform:translateX(-50%);
+    z-index:60;width:44px;height:44px;display:flex;align-items:center;justify-content:center;
+    color:var(--ink);opacity:.85;transition:opacity .3s,color .2s;
+    animation:arrowfloat 2.2s ease-in-out infinite;
+  }
+  a.downarrow:hover{color:var(--red-soft)}
+  a.downarrow.hidden{opacity:0;pointer-events:none}
+  a.downarrow svg{width:26px;height:26px;filter:drop-shadow(0 2px 8px rgba(0,0,0,.6))}
+  @keyframes arrowfloat{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,8px)}}
+  /* ---------- dots nav ---------- */
+  nav.dots{
+    position:fixed;right:1.4rem;top:50%;transform:translateY(-50%);
+    z-index:50;display:flex;flex-direction:column;gap:.7rem;
+  }
+  nav.dots a{width:7px;height:7px;border-radius:50%;background:rgba(244,242,238,.25);transition:.2s}
+  nav.dots a.active{background:var(--red);transform:scale(1.35)}
+  /* ---------- seletor de idioma ---------- */
+  .lang{position:fixed;left:1.6rem;bottom:1.4rem;z-index:70;font-family:var(--sans)}
+  .lang-btn{display:flex;align-items:center;gap:.5rem;background:rgba(22,22,24,.55);backdrop-filter:blur(4px);border:1px solid rgba(244,242,238,.2);border-radius:2rem;color:var(--ink-dim);font-family:var(--sans);font-size:.68rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;padding:.55rem 1.15rem;cursor:pointer;transition:color .2s,border-color .2s}
+  .lang-btn:hover{color:var(--red-soft);border-color:var(--red-dim)}
+  .lang-btn svg{width:14px;height:14px}
+  .lang-menu{position:absolute;left:0;bottom:calc(100% + 10px);background:#1e1e21;border:1px solid rgba(244,242,238,.14);border-radius:6px;padding:.35rem;display:none;flex-direction:column;min-width:10rem;box-shadow:0 18px 50px rgba(0,0,0,.5)}
+  .lang.open .lang-menu{display:flex}
+  .lang-menu button{background:none;border:0;color:var(--ink-dim);font-family:var(--sans);font-size:.8rem;font-weight:400;letter-spacing:.04em;text-align:left;padding:.55rem .85rem;border-radius:4px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:1.2rem;transition:background .15s,color .15s}
+  .lang-menu button:hover{background:rgba(244,242,238,.06);color:var(--ink)}
+  .lang-menu button.active{color:var(--red-soft)}
+  .lang-menu button.active:after{content:'●';font-size:.45rem;color:var(--red)}
+  /* ---------- ajustes por idioma (árabe sem letter-spacing + bullets RTL; serifas CJK) ---------- */
+  html[lang="ar"] .kicker,html[lang="ar"] .num,html[lang="ar"] a.back,html[lang="ar"] .badge,html[lang="ar"] .btn,html[lang="ar"] .chip,html[lang="ar"] .menu-col h3,html[lang="ar"] .pk .tag{letter-spacing:0}
+  html[lang="ar"] .menu-col li a:after{content:'←'}
+  html[lang="ar"] .pk li,html[lang="ar"] .ccol li{padding-left:0;padding-right:1rem}
+  html[lang="ar"] .pk li:before,html[lang="ar"] .ccol li:before{left:auto;right:0}
+  html[lang="ja"] h2,html[lang="ja"] .step h4,html[lang="ja"] .hero .sub{font-family:'Yu Mincho','Hiragino Mincho ProN','Noto Serif JP',serif}
+  html[lang="zh"] h2,html[lang="zh"] .step h4,html[lang="zh"] .hero .sub{font-family:'Noto Serif SC','Songti SC','SimSun',serif}
+  /* ---------- responsive (telemóvel: página fluida, sem slides fixos) ---------- */
+  @media(max-width:860px){
+    main{height:auto;overflow-y:visible;scroll-snap-type:none}
+    section.slide{height:auto;min-height:0;scroll-snap-align:none;scroll-snap-stop:normal;padding:4.5rem 0 3.5rem}
+    section.slide.hero{height:100vh;height:100svh;min-height:540px;padding:0}
+    /* split: coluna única, media primeiro com altura própria */
+    section.slide.split,section.slide.split.rev{display:flex;flex-direction:column;height:auto}
+    .split .text{padding:2.2rem 7vw 0}
+    .split .media{order:-1;width:100%;height:44vh;min-height:280px}
+    .split .media .grad,.split.rev .media .grad{background:linear-gradient(0deg,var(--bg) 0%,transparent 22%)}
+    /* painéis que se dimensionam ao conteúdo */
+    #s3 .media{height:auto;min-height:0}
+    .compare{position:relative;inset:auto;padding:2.5rem 7vw 0}
+    #s10 .media{height:auto;min-height:0}
+    .web-stack{position:relative;inset:auto;padding:2.5rem 7vw 0}
+    .t360{width:min(88%,520px);height:200px}
+    .laptop{width:min(88%,520px)}
+    .menu-wrap,.statement .content,.process .content,.pacotes .content{padding:0 7vw}
+    .menu-cols{grid-template-columns:1fr;gap:2rem}
+    .timeline{grid-template-columns:1fr;gap:1rem}
+    /* linha vertical a ligar as bolinhas no telemóvel */
+    .timeline:before{left:7px;right:auto;top:10px;bottom:24px;width:1px;height:auto}
+    .step{padding:0 0 0 2rem}
+    .step:before{top:2px}
+    .num{left:1.4rem;top:1.6rem}
+    a.back{right:1.4rem;top:1.4rem}
+    .lang{left:1.2rem;bottom:1.2rem}
+    nav.dots{display:none}
+    .gridslide .head{padding:0 7vw}
+    .photogrid{grid-template-columns:1fr 1fr;height:auto;grid-auto-rows:34vw;padding:0 7vw}
+    .photogrid .ph:first-child{grid-row:auto}
+    .photogrid .ph:nth-child(4){grid-column:auto}
+    .pk-grid{grid-template-columns:1fr}
+    .chart{gap:1.6rem}
+    .capa .content{margin-top:14vh}
+    /* subtítulo da capa em 2 linhas para não tapar a casa */
+    .capa .sub .subq{display:block}
+  }
+</style>
+</head>
+<body>
+<main id="deck">
+
+  <!-- 01 · CAPA -->
+  <section class="slide hero capa" id="s1">
+    <div class="bgimg" style="background-image:url('img/01-capa.jpg')"></div>
+    <div class="veil"></div>
+    <div class="content">
+      <img class="logo" src="img/00-logo-branco.png" alt="AfteREC">
+      <h1>Corporate</h1>
+      <div class="rule"></div>
+      <p class="sub">Um serviço de produção audiovisual <span class="subq">para organizações e marcas.</span></p>
+    </div>
+  </section>
+
+  <!-- 02 · O QUE É A AFTEREC -->
+  <section class="slide statement" id="s2">
+    <div class="num">02 · A AFTEREC</div>
+    <div class="content">
+      <div class="kicker">Quem somos</div>
+      <h2>Não fazemos «um vídeo institucional».<br><span class="oneline">Construímos a <em>mensagem</em> de uma marca.</span></h2>
+      <p class="body">A AfteREC é uma <strong>produtora de cinema</strong>. Produzimos conteúdos que <strong>prendem a atenção do espectador</strong>: através da narrativa, da escolha de planos, da iluminação e da direção de arte. Para cada organização, tornamos claro o que a oferta tem de único, numa peça visual que sustenta credibilidade e faz querer saber mais. Trabalhamos com <strong>organizações e marcas high-ticket</strong>, B2B e B2C, e estas peças <strong>reforçam a autoridade da marca e de quem a lidera</strong>.<br><br>Coordenamos os melhores profissionais para cada projeto e garantimos que tudo o que produzimos mantém um nível de qualidade elevado. O que pode esperar não é apenas a entrega de um vídeo: é a <strong>construção da mensagem comercial da sua organização</strong>, do guião à peça final, pronta a converter em todos os canais.</p>
+    </div>
+  </section>
+
+  <!-- 03 · PORQUE IMPORTA -->
+  <section class="slide split rev" id="s3">
+    <div class="num">03 · O MERCADO</div>
+    <div class="media">
+      <div class="compare">
+        <div class="chart">
+          <div class="ccol sem">
+            <span class="cbig">63%</span>
+            <span class="csub">dos compradores preferem conhecer uma oferta <strong>em vídeo</strong>, não em texto</span>
+            <div class="stem"></div>
+            <div class="cbar"></div>
+            <ul>
+              <li>Sem uma peça central, a mensagem muda de call para call</li>
+              <li>O lead chega sem perceber a oferta</li>
+              <li>Ciclo de venda mais longo</li>
+            </ul>
+          </div>
+          <div class="ccol com">
+            <span class="cbig">85%</span>
+            <span class="csub">dizem que <strong>um vídeo</strong> os convenceu a comprar um produto ou serviço</span>
+            <div class="stem"></div>
+            <div class="cbar"></div>
+            <ul>
+              <li>A oferta explica-se antes da conversa</li>
+              <li>Leads chegam qualificados à call</li>
+              <li>Ciclo de venda mais curto</li>
+            </ul>
+          </div>
+        </div>
+        <p class="fonte">Fonte: Wyzowl, State of Video Marketing (12 anos de dados).</p>
+      </div>
+    </div>
+    <div class="text">
+      <div class="kicker">Porque é que isto importa</div>
+      <h2>Uma boa oferta, com uma mensagem confusa, <em>não converte</em>.</h2>
+      <p class="body">Muitas organizações têm um bom produto ou serviço, mas uma mensagem confusa, genérica ou espalhada por materiais que não batem certo entre si. O resultado sente-se no comercial: cada call começa por explicar o básico, os leads chegam sem perceber a oferta e o ciclo de venda arrasta-se.<br><br>Uma peça central com <strong>linguagem de cinema que ao mesmo tempo funciona online</strong> muda esse posicionamento: a oferta explica-se antes da conversa, quem chega à call chega qualificado e a equipa comercial gasta o tempo a fechar, não a explicar. E nós garantimos que tudo isto acontece.</p>
+    </div>
+  </section>
+
+  <!-- 04 · DOIS RETORNOS -->
+  <section class="slide statement" id="s4">
+    <div class="num">04 · O RETORNO</div>
+    <div class="content">
+      <div class="kicker">Um investimento, dois retornos</div>
+      <h2>Uma peça que serve <em>dois propósitos</em>.</h2>
+      <p class="body">A peça principal <strong>converte</strong>: explica a oferta, qualifica o lead e leva-o à ação no website, nos anúncios e no email. E, ao mesmo tempo, <strong>constrói a marca</strong>: uma organização que se apresenta com padrão de cinema sustenta credibilidade em cada contacto, da primeira visita ao fecho. O conteúdo não se esgota numa campanha: fica como o ativo central da comunicação comercial, a trabalhar em todos os canais.</p>
+      <div class="ramify" style="justify-content:center">
+        <span class="chip">Website / Landing</span>
+        <span class="chip">LinkedIn</span>
+        <span class="chip">Ads</span>
+        <span class="chip">Email</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 · O SISTEMA DE CONTEÚDOS -->
+  <section class="slide" id="s5">
+    <div class="num">05 · O SISTEMA</div>
+    <div class="menu-wrap">
+      <div class="kicker">O que entregamos</div>
+      <h2>Uma peça central, <em>construída por camadas</em>.</h2>
+      <div class="menu-cols">
+        <div class="menu-col">
+          <h3>O núcleo</h3>
+          <ul>
+            <li><a href="#s6">Guião e estrutura de mensagem</a></li>
+            <li><a href="#s7">Vídeo institucional</a></li>
+            <li><a href="#s7b">VSL, o vídeo de vendas</a></li>
+            <li><a href="#s8">Captação cinematográfica</a></li>
+          </ul>
+        </div>
+        <div class="menu-col">
+          <h3>Para ir mais longe</h3>
+          <ul>
+            <li><a href="#s8">Direção de arte</a></li>
+            <li><a href="#s10">Versões por canal</a></li>
+            <li><a href="#s11">Versões curtas para redes sociais</a></li>
+          </ul>
+        </div>
+      </div>
+      <p class="menu-note">Escolhemos consigo o pacote certo para a sua organização. Nada é imposto. Clique em cada camada para a conhecer, ou <a href="#s13">veja os pacotes →</a></p>
+    </div>
+  </section>
+
+  <!-- 06 · GUIÃO -->
+  <section class="slide split" id="s6">
+    <div class="num">06 · GUIÃO</div>
+    <a class="back" href="#s5">← Todas as camadas</a>
+    <div class="text">
+      <div class="kicker">Guião e estrutura de mensagem</div>
+      <h2>70% do resultado <em>escreve-se antes de filmar</em>.</h2>
+      <p class="body">Tudo começa na escrita: um guião orientado a clareza e retenção, e uma estrutura de mensagem que organiza o que a sua organização faz, para quem e porquê. Este documento vale para além do vídeo: serve de alinhamento interno e passa a ser a fonte da mensagem em todos os materiais comerciais.<br><br>É a fase com mais peso no resultado final e é o portão da produção: <strong>nenhuma rodagem avança sem o guião aprovado por escrito</strong>. É isto que garante que a peça final diz exatamente o que precisa de dizer.</p>
+    </div>
+    <div class="media">
+      <div class="bgimg" style="background-image:url('img/06-guiao.jpg')"></div>
+      <div class="grad"></div>
+    </div>
+  </section>
+
+  <!-- 07 · VÍDEO INSTITUCIONAL -->
+  <section class="slide split" id="s7">
+    <div class="num">07 · INSTITUCIONAL</div>
+    <a class="back" href="#s5">← Todas as camadas</a>
+    <div class="text">
+      <div class="kicker">Vídeo institucional</div>
+      <h2>Não é um vídeo corporativo. É um <em>filme</em>.</h2>
+      <p class="body">A peça principal da comunicação da sua organização, produzida com as exigências de cinema: equipa com realização, direção de fotografia, som e direção de arte, e pós-produção com correção de cor e intenção editorial: progressão narrativa, ritmo e a história certa para a audiência certa.<br><br>Apresenta a organização, o produto ou o serviço com a credibilidade que o mercado high-ticket exige. E diz muito sobre quem o apresenta: uma marca que comunica com este padrão mostra que leva a sério aquilo que vende.</p>
+    </div>
+    <div class="media">
+      <!-- Substituir por vídeo exemplo real quando existir: video/07-institucional.mp4 -->
+      <div class="bgimg" style="background-image:url('img/07-institucional.jpg')"></div>
+      <div class="grad"></div>
+    </div>
+  </section>
+
+  <!-- 08 · VSL -->
+  <section class="slide split rev" id="s7b">
+    <div class="num">08 · VSL</div>
+    <a class="back" href="#s5">← Todas as camadas</a>
+    <div class="media">
+      <!-- Substituir por vídeo exemplo real quando existir: video/07b-vsl.mp4 -->
+      <div class="bgimg" style="background-image:url('img/07b-vsl.jpg')"></div>
+      <div class="grad"></div>
+    </div>
+    <div class="text">
+      <div class="kicker">VSL, o vídeo de vendas</div>
+      <h2>A oferta explicada, <em>antes da primeira call</em>.</h2>
+      <p class="body">O VSL (Video Sales Letter) é um tipo de vídeo institucional com um objetivo único: <strong>converter</strong>. Percorre o problema, a solução e a prova, e termina numa chamada para ação clara, no website, numa landing page ou numa sequência de email.<br><br>É a peça que responde às perguntas que a equipa comercial repete em todas as calls: quando o lead chega à conversa, já percebeu a oferta, e a conversa começa mais à frente. Menos fricção comercial, leads mais qualificados e um ciclo de venda mais curto.</p>
+    </div>
+  </section>
+
+  <!-- 09 · CAPTAÇÃO E DIREÇÃO DE ARTE -->
+  <section class="slide split" id="s8">
+    <div class="num">09 · RODAGEM</div>
+    <a class="back" href="#s5">← Todas as camadas</a>
+    <div class="text">
+      <div class="kicker">Captação cinematográfica e direção de arte</div>
+      <h2>Um ou dois dias de rodagem, <em>planeados ao detalhe</em>.</h2>
+      <p class="body">A captação faz-se em um dia (Base e Cinema) ou dois dias e uma noite (Personalizado), num local preparado com antecedência: checklist de preparação do espaço, folha de serviço e intervenientes confirmados. Dirigimos as pessoas da sua organização em câmara, com guias técnicos de apoio para quem fala.<br><br>No pacote Cinema entra a <strong>direção de arte</strong>: o espaço, os adereços e os detalhes visuais são trabalhados para um look mais próximo de cinema, o tratamento que separa uma peça premium de um institucional genérico.</p>
+    </div>
+    <div class="media">
+      <div class="bgimg" style="background-image:url('img/08-rodagem.jpg')"></div>
+      <div class="grad"></div>
+    </div>
+  </section>
+
+  <!-- 10 · VERSÕES POR CANAL -->
+  <section class="slide split rev" id="s10">
+    <div class="num">10 · CANAIS</div>
+    <a class="back" href="#s5">← Todas as camadas</a>
+    <div class="media">
+      <div class="web-stack">
+        <div class="laptop">
+          <div class="screen"><img class="page" src="img/10-website-page.jpg" alt="Landing page com a peça principal"></div>
+          <div class="base"></div>
+        </div>
+        <div class="t360" style="background-image:url('img/10-formatos.jpg')"></div>
+      </div>
+      <div class="grad"></div>
+    </div>
+    <div class="text">
+      <div class="kicker">Versões por canal</div>
+      <h2>Uma peça, <em>pronta para cada canal</em>.</h2>
+      <p class="body">A entrega não é um ficheiro único: é o master em máxima qualidade mais exports preparados para cada destino, o website ou landing page, o LinkedIn e os anúncios, com instrução de uso para saber exatamente qual ficheiro vai para onde.<br><br>O mesmo vídeo comprimido à pressa para todos os canais perde qualidade algures; as versões por canal garantem que a peça se apresenta no seu melhor em todo o lado. Junto segue a estrutura de mensagem, para a sua equipa usar em qualquer material futuro.</p>
+    </div>
+  </section>
+
+  <!-- 11 · VERSÕES CURTAS PARA REDES -->
+  <section class="slide split" id="s11">
+    <div class="num">11 · REDES SOCIAIS</div>
+    <a class="back" href="#s5">← Todas as camadas</a>
+    <div class="text">
+      <div class="kicker">Versões curtas para redes sociais</div>
+      <h2>A mensagem, <em>multiplicada</em>.</h2>
+      <p class="body">Quando faz sentido distribuir além do canal principal, criamos versões curtas da peça: reels, stories e shorts que levam a mesma mensagem às redes sociais, com cortes pensados para prender nos primeiros segundos.<br><br>E quando a organização não tem estrutura de marketing própria, envolvemos parceiros de marketing para criar o conceito e a distribuição, orçamentado caso a caso, para que a peça não fique parada num website.</p>
+    </div>
+    <div class="media">
+      <div class="bgimg" style="background-image:url('img/11-redes.jpg')"></div>
+      <div class="grad"></div>
+    </div>
+  </section>
+
+  <!-- 12 · PROCESSO -->
+  <section class="slide process" id="s12">
+    <div class="num">12 · PROCESSO</div>
+    <div class="content">
+      <div class="kicker">Como trabalhamos</div>
+      <h2>Um processo, uma equipa especializada, <em>um prazo</em>.</h2>
+      <div class="timeline">
+        <div class="step"><h4>Kick-off</h4><p>Reunião de alinhamento, onboarding, calendário validado consigo.</p></div>
+        <div class="step"><h4>Escrita</h4><p>Guião e estrutura de mensagem, aprovados por escrito.</p></div>
+        <div class="step"><h4>Pré-produção</h4><p>Local, equipa, folha de serviço, preparação do espaço.</p></div>
+        <div class="step"><h4>Rodagem</h4><p>1 a 2 dias no local. Direção dos intervenientes, backup no dia.</p></div>
+        <div class="step"><h4>Pós-produção</h4><p>Edição, color grading, mix de som, 2 rondas de revisão.</p></div>
+        <div class="step"><h4>Entrega</h4><p>Master + exports por canal, instrução de uso, estrutura de mensagem.</p></div>
+      </div>
+      <span class="badge">O ciclo de 2 a 3 semanas<small>do kick-off à entrega</small></span>
+      <p class="body" style="margin-top:2rem">O ciclo típico <strong>dura 2 a 3 semanas</strong>, contadas do kick-off à entrega, com o calendário validado consigo logo no início. A fase que distingue este serviço é a escrita: <strong>nenhuma rodagem avança sem o guião aprovado por escrito</strong>, porque é aí que se decide 70% do resultado. Projetos com aprovações internas mais complexas podem ir até às 6 semanas; quando há urgência, existe um fast-track de 1 a 1,5 semanas. Basta falar diretamente connosco e nós tratamos do que é necessário.</p>
+    </div>
+  </section>
+
+  <!-- 13 · PACOTES -->
+  <section class="slide pacotes" id="s13">
+    <div class="num">13 · PACOTES</div>
+    <div class="content">
+      <div class="kicker">Pacotes</div>
+      <h2>Três pontos de partida, <em>um pacote à medida</em>.</h2>
+      <div class="pk-grid">
+        <div class="pk">
+          <h4>Base</h4>
+          <div class="preco">€5.700</div>
+          <ul>
+            <li>Guião e estrutura de mensagem</li>
+            <li>Realização + direção de fotografia</li>
+            <li>Som, edição e color grading</li>
+            <li>1 dia de rodagem</li>
+            <li>Exports por canal</li>
+          </ul>
+          <div class="quem">A peça principal, sem complexidade de cenário</div>
+        </div>
+        <div class="pk destaque">
+          <span class="tag">Recomendado</span>
+          <h4>Cinema</h4>
+          <div class="preco">€6.300</div>
+          <ul>
+            <li>Tudo do Base</li>
+            <li>Direção de arte</li>
+            <li>Look mais próximo de cinema</li>
+            <li>1 dia de rodagem</li>
+          </ul>
+          <div class="quem">Para marcas que querem o padrão cinematográfico completo</div>
+        </div>
+        <div class="pk">
+          <h4>Personalizado</h4>
+          <div class="preco">desde €7.100</div>
+          <ul>
+            <li>Tudo do Cinema</li>
+            <li>2 dias e 1 noite de rodagem</li>
+            <li>Cenários múltiplos</li>
+          </ul>
+          <div class="quem">Para projetos com maior escala e ambição</div>
+        </div>
+      </div>
+      <p class="pk-note">Valores sem IVA, com deslocações e refeições da equipa incluídas. Licenças, atores profissionais e locações pagas são orçamentados à parte; as versões para redes e a distribuição envolvem parceiros de marketing, orçamentados caso a caso. O valor final é indicado na proposta enviada após a primeira reunião de descoberta. <a href="https://cal.com/afterec/discoverycall" target="_blank" rel="noopener">Marcar reunião de descoberta →</a></p>
+    </div>
+  </section>
+
+  <!-- 15 · CTA -->
+  <section class="slide statement cta" id="s14">
+    <div class="content">
+      <h2>A sua oferta merece ser <em>entendida</em>.</h2>
+      <p class="body" style="margin:0 auto">Escolhemos consigo o que a sua organização precisa. Numa breve reunião, percebemos o que pretende comunicar e sugerimos as soluções mais adequadas para atingir esses objetivos.</p>
+      <a class="btn" href="https://cal.com/afterec/discoverycall" target="_blank" rel="noopener">Marcar reunião</a>
+      <div class="contacts">
+        <a href="mailto:before@afterec.com">before@afterec.com</a><br>
+        +351 939 842 928
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<nav class="dots" id="dots"></nav>
+
+<a class="downarrow" id="downarrow" href="#s2" title="Continuar">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+</a>
+
+<div class="lang" id="lang">
+  <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-label="Idioma / Language">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15.3 15.3 0 0 1 0 18M12 3a15.3 15.3 0 0 0 0 18"/></svg>
+    <span id="langCode">PT</span>
+  </button>
+  <div class="lang-menu">
+    <button type="button" data-lang="pt" class="active">Português</button>
+    <button type="button" data-lang="en">English</button>
+    <button type="button" data-lang="es">Español</button>
+    <button type="button" data-lang="it">Italiano</button>
+    <button type="button" data-lang="de">Deutsch</button>
+    <button type="button" data-lang="da">Dansk</button>
+    <button type="button" data-lang="ja">日本語</button>
+    <button type="button" data-lang="zh">中文</button>
+    <button type="button" data-lang="ar">العربية</button>
+  </div>
+</div>
+
+<script>
+  const slides=[...document.querySelectorAll('section.slide')];
+  const dots=document.getElementById('dots');
+  slides.forEach((s,i)=>{
+    const a=document.createElement('a');
+    a.href='#'+s.id;a.title='Slide '+(i+1);
+    dots.appendChild(a);
+  });
+  const links=[...dots.children];
+  const arrow=document.getElementById('downarrow');
+  const obs=new IntersectionObserver(es=>{
+    es.forEach(e=>{
+      if(e.isIntersecting){
+        const i=slides.indexOf(e.target);
+        links.forEach(l=>l.classList.remove('active'));
+        links[i].classList.add('active');
+        if(i>=slides.length-1){arrow.classList.add('hidden')}
+        else{arrow.classList.remove('hidden');arrow.href='#'+slides[i+1].id}
+      }
+    });
+  },{threshold:.55});
+  slides.forEach(s=>obs.observe(s));
+  // animação da página no portátil via rAF (o CSS puro falha intermitentemente no Safari iOS)
+  const pg=document.querySelector('.laptop .screen .page');
+  if(pg){
+    pg.style.animation='none';
+    const DUR=26000;
+    const t0=performance.now();
+    (function tick(now){
+      const ph=((now-t0)%DUR)/DUR;
+      let tri=ph<.5?ph*2:2-ph*2;               // vai e volta 0→1→0
+      tri=tri<.06?0:tri>.94?1:(tri-.06)/.88;   // pausa nas pontas
+      const s=tri*tri*(3-2*tri);               // suavização
+      pg.style.transform='translate3d(0,'+(-64*s).toFixed(3)+'%,0)';
+      requestAnimationFrame(tick);
+    })(t0);
+  }
+  // slideshow com crossfade nas células de renders 3D (4 s por imagem, células desfasadas)
+  document.querySelectorAll('.fadeset').forEach((set,idx)=>{
+    const ls=[...set.querySelectorAll('.fl')];
+    if(ls.length<2)return;
+    let i=0,z=1;
+    setTimeout(()=>{setInterval(()=>{
+      const prev=ls[i];i=(i+1)%ls.length;const next=ls[i];
+      next.style.zIndex=++z;next.classList.add('on');
+      setTimeout(()=>prev.classList.remove('on'),1300);
+    },4000)},idx*2000);
+  });
+  // navegação por teclado
+  document.addEventListener('keydown',e=>{
+    const cur=slides.findIndex(s=>{const r=s.getBoundingClientRect();return r.top>=-10&&r.top<10});
+    if(e.key==='ArrowDown'||e.key==='PageDown'||e.key===' '){e.preventDefault();slides[Math.min(cur+1,slides.length-1)]?.scrollIntoView()}
+    if(e.key==='ArrowUp'||e.key==='PageUp'){e.preventDefault();slides[Math.max(cur-1,0)]?.scrollIntoView()}
+  });
+
+  /* ---------- sistema multilingue ----------
+     O PT no HTML é a fonte; ao mudar texto PT, atualizar a chave correspondente em I18N.
+     Persistência: localStorage. Link direto por língua: ?lang=en|es|it */
+  const LANGS=['pt','en','es','it','de','da','ja','zh','ar'];
+  const L10N_MAP={
+    's1.sub':'#s1 .sub',
+    'n2':'#s2 .num','s2.k':'#s2 .kicker','s2.h':'#s2 h2','s2.b':'#s2 p.body',
+    'n3':'#s3 .num','s3.sem':'#s3 .ccol.sem .csub','s3.semlist':'#s3 .ccol.sem ul','s3.com':'#s3 .ccol.com .csub','s3.comlist':'#s3 .ccol.com ul','s3.fonte':'#s3 .fonte','s3.k':'#s3 .kicker','s3.h':'#s3 h2','s3.b':'#s3 .text p.body',
+    'n4':'#s4 .num','s4.k':'#s4 .kicker','s4.h':'#s4 h2','s4.b':'#s4 p.body','s4.c1':'#s4 .ramify .chip:nth-child(1)','s4.c2':'#s4 .ramify .chip:nth-child(2)','s4.c3':'#s4 .ramify .chip:nth-child(3)','s4.c4':'#s4 .ramify .chip:nth-child(4)',
+    'n5':'#s5 .num','s5.k':'#s5 .kicker','s5.h':'#s5 h2','s5.c1':'#s5 .menu-col:nth-child(1) h3','s5.c2':'#s5 .menu-col:nth-child(2) h3',
+    's5.m1':'#s5 .menu-col:nth-child(1) li:nth-child(1) a','s5.m2':'#s5 .menu-col:nth-child(1) li:nth-child(2) a','s5.m3':'#s5 .menu-col:nth-child(1) li:nth-child(3) a','s5.m4':'#s5 .menu-col:nth-child(1) li:nth-child(4) a',
+    's5.m5':'#s5 .menu-col:nth-child(2) li:nth-child(1) a','s5.m6':'#s5 .menu-col:nth-child(2) li:nth-child(2) a','s5.m7':'#s5 .menu-col:nth-child(2) li:nth-child(3) a',
+    's5.note':'#s5 .menu-note',
+    'n6':'#s6 .num','s6.k':'#s6 .kicker','s6.h':'#s6 h2','s6.b':'#s6 p.body',
+    'n7':'#s7 .num','s7.k':'#s7 .kicker','s7.h':'#s7 h2','s7.b':'#s7 p.body',
+    'n7b':'#s7b .num','s7b.k':'#s7b .kicker','s7b.h':'#s7b h2','s7b.b':'#s7b p.body',
+    'n8':'#s8 .num','s8.k':'#s8 .kicker','s8.h':'#s8 h2','s8.b':'#s8 p.body',
+    'n10':'#s10 .num','s10.k':'#s10 .kicker','s10.h':'#s10 h2','s10.b':'#s10 p.body',
+    'n11':'#s11 .num','s11.k':'#s11 .kicker','s11.h':'#s11 h2','s11.b':'#s11 p.body',
+    'n12':'#s12 .num','s12.k':'#s12 .kicker','s12.h':'#s12 h2','s12.st1':'#s12 .step:nth-child(1)','s12.st2':'#s12 .step:nth-child(2)','s12.st3':'#s12 .step:nth-child(3)','s12.st4':'#s12 .step:nth-child(4)','s12.st5':'#s12 .step:nth-child(5)','s12.st6':'#s12 .step:nth-child(6)','s12.badge':'#s12 .badge','s12.b':'#s12 p.body',
+    'n13':'#s13 .num','s13.k':'#s13 .kicker','s13.h':'#s13 h2','s13.tag':'#s13 .pk .tag','s13.p1l':'#s13 .pk:nth-child(1) ul','s13.p1q':'#s13 .pk:nth-child(1) .quem','s13.p2l':'#s13 .pk:nth-child(2) ul','s13.p2q':'#s13 .pk:nth-child(2) .quem','s13.p3l':'#s13 .pk:nth-child(3) ul','s13.p3q':'#s13 .pk:nth-child(3) .quem','s13.note':'#s13 .pk-note',
+    's14.h':'#s14 h2','s14.b':'#s14 p.body','s14.btn':'#s14 .btn'
+  };
+  const I18N={
+  en:{
+    's1.sub':"An audiovisual production service <span class='subq'>for organisations and brands.</span>",
+    'n2':"02 · AFTEREC",'s2.k':"Who we are",
+    's2.h':"We don't make “a corporate video”.<br><span class='oneline'>We build a brand's <em>message</em>.</span>",
+    's2.b':"AfteREC is a <strong>film production company</strong>. We produce content that <strong>holds the viewer's attention</strong>: through narrative, shot selection, lighting and art direction. For each organisation, we make clear what is unique about the offer, in a visual piece that sustains credibility and makes people want to know more. We work with <strong>high-ticket organisations and brands</strong>, B2B and B2C, and these pieces <strong>strengthen the authority of the brand and of the people leading it</strong>.<br><br>We coordinate the best professionals for each project and make sure everything we produce maintains a high standard of quality. What you can expect is not just the delivery of a video: it is the <strong>construction of your organisation's commercial message</strong>, from script to final piece, ready to convert across every channel.",
+    'n3':"03 · THE MARKET",
+    's3.sem':"of buyers prefer to learn about an offer <strong>through video</strong>, not text",
+    's3.semlist':"<li>Without a central piece, the message changes from call to call</li><li>Leads arrive without understanding the offer</li><li>Longer sales cycle</li>",
+    's3.com':"say <strong>a video</strong> convinced them to buy a product or service",
+    's3.comlist':"<li>The offer explains itself before the conversation</li><li>Leads arrive at the call already qualified</li><li>Shorter sales cycle</li>",
+    's3.fonte':"Source: Wyzowl, State of Video Marketing (12 years of data).",
+    's3.k':"Why this matters",
+    's3.h':"A good offer with a confusing message <em>doesn't convert</em>.",
+    's3.b':"Many organisations have a good product or service, but a message that is confusing, generic or scattered across materials that don't line up. The result is felt in sales: every call starts by explaining the basics, leads arrive without understanding the offer, and the sales cycle drags on.<br><br>A central piece with <strong>the language of cinema that also works online</strong> changes that positioning: the offer explains itself before the conversation, whoever reaches the call arrives qualified, and the sales team spends its time closing, not explaining. And we make sure all of this happens.",
+    'n4':"04 · THE RETURN",'s4.k':"One investment, two returns",
+    's4.h':"One piece that serves <em>two purposes</em>.",
+    's4.b':"The main piece <strong>converts</strong>: it explains the offer, qualifies the lead and drives action on the website, in ads and in email. And, at the same time, it <strong>builds the brand</strong>: an organisation that presents itself with the standard of cinema sustains credibility at every touchpoint, from first visit to closing. The content doesn't burn out in one campaign: it remains the central asset of your commercial communication, working across every channel.",
+    's4.c1':"Website / Landing",'s4.c2':"LinkedIn",'s4.c3':"Ads",'s4.c4':"Email",
+    'n5':"05 · THE SYSTEM",'s5.k':"What we deliver",
+    's5.h':"One central piece, <em>built in layers</em>.",
+    's5.c1':"The core",'s5.c2':"To go further",
+    's5.m1':"Script & message structure",'s5.m2':"Corporate film",'s5.m3':"VSL (Video Sales Letter)",'s5.m4':"Cinematic filming",
+    's5.m5':"Art direction",'s5.m6':"Channel-ready versions",'s5.m7':"Short versions for social media",
+    's5.note':"Together, we choose the right package for your organisation. Nothing is imposed. Click on each layer to learn more, or <a href='#s13'>see the packages →</a>",
+    'n6':"06 · SCRIPT",'s6.k':"Script and message structure",
+    's6.h':"70% of the result <em>is written before filming</em>.",
+    's6.b':"Everything starts with the writing: a script built for clarity and retention, and a message structure that organises what your organisation does, for whom and why. This document is worth more than the video: it serves as internal alignment and becomes the source of the message across all commercial materials.<br><br>It is the phase with the most weight in the final result, and it is the gate of production: <strong>no shoot goes ahead without the script approved in writing</strong>. That is what guarantees the final piece says exactly what it needs to say.",
+    'n7':"07 · BRAND FILM",'s7.k':"Corporate film",
+    's7.h':"It's not a corporate video. It's a <em>film</em>.",
+    's7.b':"The main piece of your organisation's communication, produced to the standards of cinema: a crew with direction, cinematography, sound and art direction, and post-production with colour grading and editorial intent: narrative progression, rhythm, and the right story for the right audience.<br><br>It presents the organisation, the product or the service with the credibility the high-ticket market demands. And it says a lot about whoever presents it: a brand that communicates at this standard shows it takes what it sells seriously.",
+    'n7b':"08 · VSL",'s7b.k':"VSL, the sales video",
+    's7b.h':"The offer explained, <em>before the first call</em>.",
+    's7b.b':"A VSL (Video Sales Letter) is a type of corporate film with a single goal: <strong>to convert</strong>. It walks through the problem, the solution and the proof, and ends with a clear call to action, on the website, on a landing page or in an email sequence.<br><br>It is the piece that answers the questions your sales team repeats in every call: by the time the lead reaches the conversation, they have already understood the offer, and the conversation starts further ahead. Less commercial friction, better-qualified leads and a shorter sales cycle.",
+    'n8':"09 · THE SHOOT",'s8.k':"Cinematic filming and art direction",
+    's8.h':"One or two days of shooting, <em>planned in detail</em>.",
+    's8.b':"Filming takes one day (Base and Cinema) or two days and one night (Personalizado), at a location prepared in advance: a space-preparation checklist, a call sheet and confirmed participants. We direct your organisation's people on camera, with technical guides to support whoever speaks.<br><br>The Cinema package adds <strong>art direction</strong>: the space, the props and the visual details are refined for a look closer to cinema, the treatment that separates a premium piece from a generic corporate video.",
+    'n10':"10 · CHANNELS",'s10.k':"Channel-ready versions",
+    's10.h':"One piece, <em>ready for every channel</em>.",
+    's10.b':"The delivery is not a single file: it is the master at maximum quality plus exports prepared for each destination, the website or landing page, LinkedIn and ads, with usage guidelines so you know exactly which file goes where.<br><br>The same video compressed in a hurry for every channel loses quality somewhere; channel-ready versions guarantee the piece looks its best everywhere. The message structure comes with it, for your team to use in any future material.",
+    'n11':"11 · SOCIAL MEDIA",'s11.k':"Short versions for social media",
+    's11.h':"The message, <em>multiplied</em>.",
+    's11.b':"When it makes sense to distribute beyond the main channel, we create short versions of the piece: reels, stories and shorts that carry the same message to social media, with cuts designed to hook in the first seconds.<br><br>And when the organisation has no marketing structure of its own, we bring in marketing partners to create the concept and the distribution, budgeted case by case, so the piece doesn't sit still on a website.",
+    'n12':"12 · PROCESS",'s12.k':"How we work",
+    's12.h':"One process, a specialised team, <em>one deadline</em>.",
+    's12.st1':"<h4>Kick-off</h4><p>Alignment meeting, onboarding, schedule validated with you.</p>",
+    's12.st2':"<h4>Writing</h4><p>Script and message structure, approved in writing.</p>",
+    's12.st3':"<h4>Pre-production</h4><p>Location, crew, call sheet, space preparation.</p>",
+    's12.st4':"<h4>Shoot</h4><p>1 to 2 days on location. Direction of participants, backup on the day.</p>",
+    's12.st5':"<h4>Post-production</h4><p>Editing, colour grading, sound mix, 2 revision rounds.</p>",
+    's12.st6':"<h4>Delivery</h4><p>Master + channel exports, usage guidelines, message structure.</p>",
+    's12.badge':"The 2-to-3-week cycle<small>from kick-off to delivery</small>",
+    's12.b':"The typical cycle <strong>takes 2 to 3 weeks</strong>, counted from kick-off to delivery, with the schedule validated with you right at the start. The phase that sets this service apart is the writing: <strong>no shoot goes ahead without the script approved in writing</strong>, because that is where 70% of the result is decided. Projects with more complex internal approvals can take up to 6 weeks; when there is urgency, a fast-track of 1 to 1.5 weeks is available. You simply talk directly to us, and we take care of everything that is needed.",
+    'n13':"13 · PACKAGES",'s13.k':"Packages",
+    's13.h':"Three starting points, <em>one tailored package</em>.",
+    's13.tag':"Recommended",
+    's13.p1l':"<li>Script and message structure</li><li>Direction + cinematography</li><li>Sound, editing and colour grading</li><li>1 day of shooting</li><li>Channel exports</li>",
+    's13.p1q':"The main piece, without set complexity",
+    's13.p2l':"<li>Everything in Base</li><li>Art direction</li><li>A look closer to cinema</li><li>1 day of shooting</li>",
+    's13.p2q':"For brands that want the full cinematic standard",
+    's13.p3l':"<li>Everything in Cinema</li><li>2 days and 1 night of shooting</li><li>Multiple sets</li>",
+    's13.p3q':"For projects with greater scale and ambition",
+    's13.note':"Prices excl. VAT, with team travel and meals included. Licences, professional actors and paid locations are budgeted separately; social media versions and distribution involve marketing partners, budgeted case by case. The final value is stated in the proposal sent after the first discovery meeting. <a href='https://cal.com/afterec/discoverycall' target='_blank' rel='noopener'>Book a discovery meeting →</a>",
+    's14.h':"Your offer deserves to be <em>understood</em>.",
+    's14.b':"Together, we choose what your organisation needs. In a short meeting, we understand what you want to communicate and suggest the most suitable solutions to achieve those goals.",
+    's14.btn':"Book a meeting"
+  },
+  es:{
+    's1.sub':"Un servicio de producción audiovisual <span class='subq'>para organizaciones y marcas.</span>",
+    'n2':"02 · AFTEREC",'s2.k':"Quiénes somos",
+    's2.h':"No hacemos «un vídeo institucional».<br><span class='oneline'>Construimos el <em>mensaje</em> de una marca.</span>",
+    's2.b':"AfteREC es una <strong>productora de cine</strong>. Producimos contenidos que <strong>captan la atención del espectador</strong>: a través de la narrativa, la elección de planos, la iluminación y la dirección de arte. Para cada organización, dejamos claro lo que su oferta tiene de único, en una pieza visual que sostiene credibilidad y despierta las ganas de saber más. Trabajamos con <strong>organizaciones y marcas high-ticket</strong>, B2B y B2C, y estas piezas <strong>refuerzan la autoridad de la marca y de quienes la lideran</strong>.<br><br>Coordinamos a los mejores profesionales para cada proyecto y garantizamos que todo lo que producimos mantiene un nivel de calidad elevado. Lo que puede esperar no es solo la entrega de un vídeo: es la <strong>construcción del mensaje comercial de su organización</strong>, del guion a la pieza final, lista para convertir en todos los canales.",
+    'n3':"03 · EL MERCADO",
+    's3.sem':"de los compradores prefieren conocer una oferta <strong>en vídeo</strong>, no en texto",
+    's3.semlist':"<li>Sin una pieza central, el mensaje cambia de call en call</li><li>El lead llega sin entender la oferta</li><li>Ciclo de venta más largo</li>",
+    's3.com':"dicen que <strong>un vídeo</strong> los convenció de comprar un producto o servicio",
+    's3.comlist':"<li>La oferta se explica antes de la conversación</li><li>Los leads llegan cualificados a la call</li><li>Ciclo de venta más corto</li>",
+    's3.fonte':"Fuente: Wyzowl, State of Video Marketing (12 años de datos).",
+    's3.k':"Por qué importa",
+    's3.h':"Una buena oferta, con un mensaje confuso, <em>no convierte</em>.",
+    's3.b':"Muchas organizaciones tienen un buen producto o servicio, pero un mensaje confuso, genérico o disperso en materiales que no encajan entre sí. El resultado se siente en el área comercial: cada call empieza explicando lo básico, los leads llegan sin entender la oferta y el ciclo de venta se alarga.<br><br>Una pieza central con <strong>lenguaje de cine que al mismo tiempo funciona online</strong> cambia ese posicionamiento: la oferta se explica antes de la conversación, quien llega a la call llega cualificado y el equipo comercial dedica su tiempo a cerrar, no a explicar. Y nosotros garantizamos que todo esto suceda.",
+    'n4':"04 · EL RETORNO",'s4.k':"Una inversión, dos retornos",
+    's4.h':"Una pieza que cumple <em>dos propósitos</em>.",
+    's4.b':"La pieza principal <strong>convierte</strong>: explica la oferta, cualifica al lead y lo lleva a la acción en la web, en los anuncios y en el email. Y, al mismo tiempo, <strong>construye la marca</strong>: una organización que se presenta con estándar de cine sostiene credibilidad en cada contacto, de la primera visita al cierre. El contenido no se agota en una campaña: queda como el activo central de la comunicación comercial, trabajando en todos los canales.",
+    's4.c1':"Web / Landing",'s4.c2':"LinkedIn",'s4.c3':"Ads",'s4.c4':"Email",
+    'n5':"05 · EL SISTEMA",'s5.k':"Qué entregamos",
+    's5.h':"Una pieza central, <em>construida por capas</em>.",
+    's5.c1':"El núcleo",'s5.c2':"Para ir más lejos",
+    's5.m1':"Guion y estructura de mensaje",'s5.m2':"Vídeo institucional",'s5.m3':"VSL, el vídeo de ventas",'s5.m4':"Rodaje cinematográfico",
+    's5.m5':"Dirección de arte",'s5.m6':"Versiones por canal",'s5.m7':"Versiones cortas para redes sociales",
+    's5.note':"Elegimos con usted el paquete adecuado para su organización. Nada es impuesto. Haga clic en cada capa para conocerla, o <a href='#s13'>vea los paquetes →</a>",
+    'n6':"06 · GUION",'s6.k':"Guion y estructura de mensaje",
+    's6.h':"El 70% del resultado <em>se escribe antes de rodar</em>.",
+    's6.b':"Todo empieza en la escritura: un guion orientado a claridad y retención, y una estructura de mensaje que organiza lo que su organización hace, para quién y por qué. Este documento vale más allá del vídeo: sirve de alineamiento interno y pasa a ser la fuente del mensaje en todos los materiales comerciales.<br><br>Es la fase con más peso en el resultado final y es la puerta de la producción: <strong>ningún rodaje avanza sin el guion aprobado por escrito</strong>. Eso es lo que garantiza que la pieza final diga exactamente lo que necesita decir.",
+    'n7':"07 · INSTITUCIONAL",'s7.k':"Vídeo institucional",
+    's7.h':"No es un vídeo corporativo. Es una <em>película</em>.",
+    's7.b':"La pieza principal de la comunicación de su organización, producida con las exigencias del cine: equipo con realización, dirección de fotografía, sonido y dirección de arte, y postproducción con corrección de color e intención editorial: progresión narrativa, ritmo y la historia adecuada para la audiencia adecuada.<br><br>Presenta la organización, el producto o el servicio con la credibilidad que el mercado high-ticket exige. Y dice mucho de quien lo presenta: una marca que comunica con este estándar demuestra que se toma en serio lo que vende.",
+    'n7b':"08 · VSL",'s7b.k':"VSL, el vídeo de ventas",
+    's7b.h':"La oferta explicada, <em>antes de la primera call</em>.",
+    's7b.b':"El VSL (Video Sales Letter) es un tipo de vídeo institucional con un objetivo único: <strong>convertir</strong>. Recorre el problema, la solución y la prueba, y termina en una llamada a la acción clara, en la web, en una landing page o en una secuencia de email.<br><br>Es la pieza que responde a las preguntas que el equipo comercial repite en todas las calls: cuando el lead llega a la conversación, ya ha entendido la oferta, y la conversación empieza más adelante. Menos fricción comercial, leads más cualificados y un ciclo de venta más corto.",
+    'n8':"09 · RODAJE",'s8.k':"Rodaje cinematográfico y dirección de arte",
+    's8.h':"Uno o dos días de rodaje, <em>planificados al detalle</em>.",
+    's8.b':"La grabación se hace en un día (Base y Cinema) o dos días y una noche (Personalizado), en un lugar preparado con antelación: checklist de preparación del espacio, hoja de servicio e intervinientes confirmados. Dirigimos a las personas de su organización ante la cámara, con guías técnicas de apoyo para quien habla.<br><br>En el paquete Cinema entra la <strong>dirección de arte</strong>: el espacio, el atrezo y los detalles visuales se trabajan para un look más cercano al cine, el tratamiento que separa una pieza premium de un institucional genérico.",
+    'n10':"10 · CANALES",'s10.k':"Versiones por canal",
+    's10.h':"Una pieza, <em>lista para cada canal</em>.",
+    's10.b':"La entrega no es un archivo único: es el máster en máxima calidad más exports preparados para cada destino, la web o landing page, LinkedIn y los anuncios, con instrucciones de uso para saber exactamente qué archivo va a dónde.<br><br>El mismo vídeo comprimido a toda prisa para todos los canales pierde calidad en algún punto; las versiones por canal garantizan que la pieza se presenta en su mejor versión en todas partes. Junto va la estructura de mensaje, para que su equipo la use en cualquier material futuro.",
+    'n11':"11 · REDES SOCIALES",'s11.k':"Versiones cortas para redes sociales",
+    's11.h':"El mensaje, <em>multiplicado</em>.",
+    's11.b':"Cuando tiene sentido distribuir más allá del canal principal, creamos versiones cortas de la pieza: reels, stories y shorts que llevan el mismo mensaje a las redes sociales, con cortes pensados para atrapar en los primeros segundos.<br><br>Y cuando la organización no tiene estructura de marketing propia, involucramos a socios de marketing para crear el concepto y la distribución, presupuestado caso a caso, para que la pieza no se quede parada en una web.",
+    'n12':"12 · PROCESO",'s12.k':"Cómo trabajamos",
+    's12.h':"Un proceso, un equipo especializado, <em>un plazo</em>.",
+    's12.st1':"<h4>Kick-off</h4><p>Reunión de alineamiento, onboarding, calendario validado con usted.</p>",
+    's12.st2':"<h4>Escritura</h4><p>Guion y estructura de mensaje, aprobados por escrito.</p>",
+    's12.st3':"<h4>Preproducción</h4><p>Lugar, equipo, hoja de servicio, preparación del espacio.</p>",
+    's12.st4':"<h4>Rodaje</h4><p>1 a 2 días en el lugar. Dirección de los intervinientes, backup el mismo día.</p>",
+    's12.st5':"<h4>Postproducción</h4><p>Edición, corrección de color, mezcla de sonido, 2 rondas de revisión.</p>",
+    's12.st6':"<h4>Entrega</h4><p>Máster + exports por canal, instrucciones de uso, estructura de mensaje.</p>",
+    's12.badge':"El ciclo de 2 a 3 semanas<small>del kick-off a la entrega</small>",
+    's12.b':"El ciclo típico <strong>dura de 2 a 3 semanas</strong>, contadas del kick-off a la entrega, con el calendario validado con usted desde el principio. La fase que distingue este servicio es la escritura: <strong>ningún rodaje avanza sin el guion aprobado por escrito</strong>, porque ahí se decide el 70% del resultado. Los proyectos con aprobaciones internas más complejas pueden llegar a las 6 semanas; cuando hay urgencia, existe un fast-track de 1 a 1,5 semanas. Basta con hablar directamente con nosotros y nos ocupamos de lo necesario.",
+    'n13':"13 · PAQUETES",'s13.k':"Paquetes",
+    's13.h':"Tres puntos de partida, <em>un paquete a medida</em>.",
+    's13.tag':"Recomendado",
+    's13.p1l':"<li>Guion y estructura de mensaje</li><li>Realización + dirección de fotografía</li><li>Sonido, edición y corrección de color</li><li>1 día de rodaje</li><li>Exports por canal</li>",
+    's13.p1q':"La pieza principal, sin complejidad de escenario",
+    's13.p2l':"<li>Todo lo del Base</li><li>Dirección de arte</li><li>Un look más cercano al cine</li><li>1 día de rodaje</li>",
+    's13.p2q':"Para marcas que quieren el estándar cinematográfico completo",
+    's13.p3l':"<li>Todo lo del Cinema</li><li>2 días y 1 noche de rodaje</li><li>Escenarios múltiples</li>",
+    's13.p3q':"Para proyectos con mayor escala y ambición",
+    's13.note':"Precios sin IVA, con desplazamientos y comidas del equipo incluidos. Licencias, actores profesionales y localizaciones de pago se presupuestan aparte; las versiones para redes y la distribución involucran a socios de marketing, presupuestados caso a caso. El valor final se indica en la propuesta enviada tras la primera reunión. <a href='https://cal.com/afterec/discoverycall' target='_blank' rel='noopener'>Reservar una primera reunión →</a>",
+    's14.h':"Su oferta merece ser <em>entendida</em>.",
+    's14.b':"Elegimos con usted lo que su organización necesita. En una breve reunión, entendemos lo que quiere comunicar y sugerimos las soluciones más adecuadas para alcanzar esos objetivos.",
+    's14.btn':"Reservar reunión"
+  },
+  it:{
+    's1.sub':"Un servizio di produzione audiovisiva <span class='subq'>per organizzazioni e brand.</span>",
+    'n2':"02 · AFTEREC",'s2.k':"Chi siamo",
+    's2.h':"Non facciamo «un video istituzionale».<br><span class='oneline'>Costruiamo il <em>messaggio</em> di un brand.</span>",
+    's2.b':"AfteREC è una <strong>casa di produzione cinematografica</strong>. Produciamo contenuti che <strong>catturano l'attenzione dello spettatore</strong>: attraverso la narrazione, la scelta delle inquadrature, l'illuminazione e la direzione artistica. Per ogni organizzazione rendiamo chiaro ciò che la sua offerta ha di unico, in un racconto visivo che sostiene la credibilità e fa venire voglia di saperne di più. Lavoriamo con <strong>organizzazioni e brand high-ticket</strong>, B2B e B2C, e questi contenuti <strong>rafforzano l'autorevolezza del brand e di chi lo guida</strong>.<br><br>Coordiniamo i migliori professionisti per ogni progetto e garantiamo che tutto ciò che produciamo mantenga un livello di qualità elevato. Ciò che può aspettarsi non è solo la consegna di un video: è la <strong>costruzione del messaggio commerciale della sua organizzazione</strong>, dalla sceneggiatura al pezzo finale, pronto a convertire su tutti i canali.",
+    'n3':"03 · IL MERCATO",
+    's3.sem':"degli acquirenti preferisce conoscere un'offerta <strong>in video</strong>, non in testo",
+    's3.semlist':"<li>Senza un contenuto centrale, il messaggio cambia da call a call</li><li>Il lead arriva senza capire l'offerta</li><li>Ciclo di vendita più lungo</li>",
+    's3.com':"dicono che <strong>un video</strong> li ha convinti a comprare un prodotto o servizio",
+    's3.comlist':"<li>L'offerta si spiega prima della conversazione</li><li>I lead arrivano alla call già qualificati</li><li>Ciclo di vendita più corto</li>",
+    's3.fonte':"Fonte: Wyzowl, State of Video Marketing (12 anni di dati).",
+    's3.k':"Perché è importante",
+    's3.h':"Una buona offerta, con un messaggio confuso, <em>non converte</em>.",
+    's3.b':"Molte organizzazioni hanno un buon prodotto o servizio, ma un messaggio confuso, generico o sparso in materiali che non combaciano tra loro. Il risultato si sente nel commerciale: ogni call inizia spiegando le basi, i lead arrivano senza capire l'offerta e il ciclo di vendita si allunga.<br><br>Un contenuto centrale con <strong>un linguaggio cinematografico che allo stesso tempo funziona online</strong> cambia quel posizionamento: l'offerta si spiega prima della conversazione, chi arriva alla call arriva qualificato e il team commerciale usa il tempo per chiudere, non per spiegare. E noi garantiamo che tutto questo accada.",
+    'n4':"04 · IL RITORNO",'s4.k':"Un investimento, due ritorni",
+    's4.h':"Un contenuto che serve <em>due scopi</em>.",
+    's4.b':"Il pezzo principale <strong>converte</strong>: spiega l'offerta, qualifica il lead e lo porta all'azione sul sito, negli annunci e nell'email. E, allo stesso tempo, <strong>costruisce il brand</strong>: un'organizzazione che si presenta con lo standard del cinema sostiene la credibilità in ogni contatto, dalla prima visita alla chiusura. Il contenuto non si esaurisce in una campagna: resta l'asset centrale della comunicazione commerciale, al lavoro su tutti i canali.",
+    's4.c1':"Sito / Landing",'s4.c2':"LinkedIn",'s4.c3':"Ads",'s4.c4':"Email",
+    'n5':"05 · IL SISTEMA",'s5.k':"Cosa consegniamo",
+    's5.h':"Un contenuto centrale, <em>costruito a livelli</em>.",
+    's5.c1':"Il nucleo",'s5.c2':"Per andare oltre",
+    's5.m1':"Sceneggiatura e struttura del messaggio",'s5.m2':"Video istituzionale",'s5.m3':"VSL, il video di vendita",'s5.m4':"Riprese cinematografiche",
+    's5.m5':"Direzione artistica",'s5.m6':"Versioni per canale",'s5.m7':"Versioni brevi per i social",
+    's5.note':"Scegliamo insieme a lei il pacchetto giusto per la sua organizzazione. Nulla è imposto. Clicchi su ogni livello per scoprirlo, oppure <a href='#s13'>veda i pacchetti →</a>",
+    'n6':"06 · SCENEGGIATURA",'s6.k':"Sceneggiatura e struttura del messaggio",
+    's6.h':"Il 70% del risultato <em>si scrive prima di girare</em>.",
+    's6.b':"Tutto inizia dalla scrittura: una sceneggiatura orientata a chiarezza e retention, e una struttura del messaggio che organizza ciò che la sua organizzazione fa, per chi e perché. Questo documento vale oltre il video: serve da allineamento interno e diventa la fonte del messaggio in tutti i materiali commerciali.<br><br>È la fase con più peso sul risultato finale ed è il cancello della produzione: <strong>nessuna ripresa parte senza la sceneggiatura approvata per iscritto</strong>. È questo che garantisce che il pezzo finale dica esattamente ciò che deve dire.",
+    'n7':"07 · ISTITUZIONALE",'s7.k':"Video istituzionale",
+    's7.h':"Non è un video aziendale. È un <em>film</em>.",
+    's7.b':"Il pezzo principale della comunicazione della sua organizzazione, prodotto con gli standard del cinema: una troupe con regia, direzione della fotografia, suono e direzione artistica, e post-produzione con color grading e intenzione editoriale: progressione narrativa, ritmo e la storia giusta per il pubblico giusto.<br><br>Presenta l'organizzazione, il prodotto o il servizio con la credibilità che il mercato high-ticket esige. E dice molto su chi lo presenta: un brand che comunica con questo standard dimostra di prendere sul serio ciò che vende.",
+    'n7b':"08 · VSL",'s7b.k':"VSL, il video di vendita",
+    's7b.h':"L'offerta spiegata, <em>prima della prima call</em>.",
+    's7b.b':"Il VSL (Video Sales Letter) è un tipo di video istituzionale con un unico obiettivo: <strong>convertire</strong>. Attraversa il problema, la soluzione e la prova, e termina con una call to action chiara, sul sito, su una landing page o in una sequenza email.<br><br>È il contenuto che risponde alle domande che il team commerciale ripete in ogni call: quando il lead arriva alla conversazione, ha già capito l'offerta, e la conversazione inizia più avanti. Meno attrito commerciale, lead più qualificati e un ciclo di vendita più corto.",
+    'n8':"09 · RIPRESE",'s8.k':"Riprese cinematografiche e direzione artistica",
+    's8.h':"Uno o due giorni di riprese, <em>pianificati nel dettaglio</em>.",
+    's8.b':"Le riprese si fanno in un giorno (Base e Cinema) o due giorni e una notte (Personalizado), in un luogo preparato in anticipo: checklist di preparazione dello spazio, ordine del giorno e partecipanti confermati. Dirigiamo le persone della sua organizzazione davanti alla camera, con guide tecniche di supporto per chi parla.<br><br>Nel pacchetto Cinema entra la <strong>direzione artistica</strong>: lo spazio, gli oggetti di scena e i dettagli visivi vengono curati per un look più vicino al cinema, il trattamento che separa un contenuto premium da un istituzionale generico.",
+    'n10':"10 · CANALI",'s10.k':"Versioni per canale",
+    's10.h':"Un contenuto, <em>pronto per ogni canale</em>.",
+    's10.b':"La consegna non è un file unico: è il master alla massima qualità più export preparati per ogni destinazione, il sito o la landing page, LinkedIn e gli annunci, con istruzioni d'uso per sapere esattamente quale file va dove.<br><br>Lo stesso video compresso in fretta per tutti i canali perde qualità da qualche parte; le versioni per canale garantiscono che il contenuto si presenti al meglio ovunque. Insieme arriva la struttura del messaggio, che il suo team può usare in qualsiasi materiale futuro.",
+    'n11':"11 · SOCIAL MEDIA",'s11.k':"Versioni brevi per i social",
+    's11.h':"Il messaggio, <em>moltiplicato</em>.",
+    's11.b':"Quando ha senso distribuire oltre il canale principale, creiamo versioni brevi del contenuto: reel, stories e shorts che portano lo stesso messaggio sui social, con tagli pensati per catturare nei primi secondi.<br><br>E quando l'organizzazione non ha una struttura marketing propria, coinvolgiamo partner di marketing per creare il concept e la distribuzione, preventivati caso per caso, perché il contenuto non resti fermo su un sito.",
+    'n12':"12 · PROCESSO",'s12.k':"Come lavoriamo",
+    's12.h':"Un processo, un team specializzato, <em>una scadenza</em>.",
+    's12.st1':"<h4>Kick-off</h4><p>Incontro di allineamento, onboarding, calendario validato con lei.</p>",
+    's12.st2':"<h4>Scrittura</h4><p>Sceneggiatura e struttura del messaggio, approvate per iscritto.</p>",
+    's12.st3':"<h4>Pre-produzione</h4><p>Location, troupe, ordine del giorno, preparazione dello spazio.</p>",
+    's12.st4':"<h4>Riprese</h4><p>1-2 giorni sul posto. Direzione dei partecipanti, backup in giornata.</p>",
+    's12.st5':"<h4>Post-produzione</h4><p>Montaggio, color grading, mix audio, 2 giri di revisione.</p>",
+    's12.st6':"<h4>Consegna</h4><p>Master + export per canale, istruzioni d'uso, struttura del messaggio.</p>",
+    's12.badge':"Il ciclo di 2-3 settimane<small>dal kick-off alla consegna</small>",
+    's12.b':"Il ciclo tipico <strong>dura da 2 a 3 settimane</strong>, contate dal kick-off alla consegna, con il calendario validato con lei fin dall'inizio. La fase che distingue questo servizio è la scrittura: <strong>nessuna ripresa parte senza la sceneggiatura approvata per iscritto</strong>, perché è lì che si decide il 70% del risultato. I progetti con approvazioni interne più complesse possono arrivare a 6 settimane; quando c'è urgenza, esiste un fast-track di 1-1,5 settimane. Basta parlare direttamente con noi e ci occupiamo noi di tutto il necessario.",
+    'n13':"13 · PACCHETTI",'s13.k':"Pacchetti",
+    's13.h':"Tre punti di partenza, <em>un pacchetto su misura</em>.",
+    's13.tag':"Consigliato",
+    's13.p1l':"<li>Sceneggiatura e struttura del messaggio</li><li>Regia + direzione della fotografia</li><li>Suono, montaggio e color grading</li><li>1 giorno di riprese</li><li>Export per canale</li>",
+    's13.p1q':"Il pezzo principale, senza complessità di scena",
+    's13.p2l':"<li>Tutto ciò che include Base</li><li>Direzione artistica</li><li>Un look più vicino al cinema</li><li>1 giorno di riprese</li>",
+    's13.p2q':"Per brand che vogliono lo standard cinematografico completo",
+    's13.p3l':"<li>Tutto ciò che include Cinema</li><li>2 giorni e 1 notte di riprese</li><li>Scenari multipli</li>",
+    's13.p3q':"Per progetti con più scala e ambizione",
+    's13.note':"Prezzi IVA esclusa, con trasferte e pasti del team inclusi. Licenze, attori professionisti e location a pagamento vengono preventivati a parte; le versioni per i social e la distribuzione coinvolgono partner di marketing, preventivati caso per caso. Il valore finale è indicato nella proposta inviata dopo il primo incontro conoscitivo. <a href='https://cal.com/afterec/discoverycall' target='_blank' rel='noopener'>Prenotare un primo incontro →</a>",
+    's14.h':"La sua offerta merita di essere <em>capita</em>.",
+    's14.b':"Scegliamo insieme a lei ciò di cui la sua organizzazione ha bisogno. In un breve incontro, capiamo cosa vuole comunicare e suggeriamo le soluzioni più adatte per raggiungere questi obiettivi.",
+    's14.btn':"Prenota un incontro"
+  },
+  de:{
+    's1.sub':"Ein audiovisueller Produktionsservice <span class='subq'>für Organisationen und Marken.</span>",
+    'n2':"02 · AFTEREC",'s2.k':"Wer wir sind",
+    's2.h':"Wir machen nicht „ein Imagevideo“.<br><span class='oneline'>Wir bauen die <em>Botschaft</em> einer Marke.</span>",
+    's2.b':"AfteREC ist eine <strong>Filmproduktionsfirma</strong>. Wir produzieren Inhalte, die <strong>die Aufmerksamkeit des Zuschauers halten</strong>: durch Erzählung, Bildauswahl, Licht und Art Direction. Für jede Organisation machen wir klar, was ihr Angebot einzigartig macht, in einem visuellen Werk, das Glaubwürdigkeit trägt und Lust auf mehr macht. Wir arbeiten mit <strong>High-Ticket-Organisationen und -Marken</strong>, B2B und B2C, und diese Werke <strong>stärken die Autorität der Marke und derer, die sie führen</strong>.<br><br>Wir koordinieren die besten Fachleute für jedes Projekt und stellen sicher, dass alles, was wir produzieren, ein hohes Qualitätsniveau hält. Was Sie erwarten können, ist nicht nur die Lieferung eines Videos: Es ist der <strong>Aufbau der kommerziellen Botschaft Ihrer Organisation</strong>, vom Drehbuch bis zum fertigen Werk, bereit, auf jedem Kanal zu konvertieren.",
+    'n3':"03 · DER MARKT",
+    's3.sem':"der Käufer lernen ein Angebot lieber <strong>per Video</strong> kennen, nicht per Text",
+    's3.semlist':"<li>Ohne zentrales Werk ändert sich die Botschaft von Call zu Call</li><li>Leads kommen an, ohne das Angebot zu verstehen</li><li>Längerer Verkaufszyklus</li>",
+    's3.com':"sagen, <strong>ein Video</strong> habe sie vom Kauf eines Produkts oder Services überzeugt",
+    's3.comlist':"<li>Das Angebot erklärt sich vor dem Gespräch</li><li>Leads kommen qualifiziert in den Call</li><li>Kürzerer Verkaufszyklus</li>",
+    's3.fonte':"Quelle: Wyzowl, State of Video Marketing (12 Jahre Daten).",
+    's3.k':"Warum das wichtig ist",
+    's3.h':"Ein gutes Angebot mit einer verwirrenden Botschaft <em>konvertiert nicht</em>.",
+    's3.b':"Viele Organisationen haben ein gutes Produkt oder einen guten Service, aber eine Botschaft, die verwirrend, generisch oder über Materialien verstreut ist, die nicht zusammenpassen. Das Ergebnis spürt der Vertrieb: Jeder Call beginnt mit den Grundlagen, Leads kommen an, ohne das Angebot zu verstehen, und der Verkaufszyklus zieht sich.<br><br>Ein zentrales Werk mit <strong>der Sprache des Kinos, die zugleich online funktioniert</strong>, verändert diese Positionierung: Das Angebot erklärt sich vor dem Gespräch, wer in den Call kommt, kommt qualifiziert, und das Vertriebsteam verbringt seine Zeit mit dem Abschluss, nicht mit Erklärungen. Und wir sorgen dafür, dass all das passiert.",
+    'n4':"04 · DER ERTRAG",'s4.k':"Eine Investition, zwei Erträge",
+    's4.h':"Ein Werk, das <em>zwei Zwecke</em> erfüllt.",
+    's4.b':"Das Hauptwerk <strong>konvertiert</strong>: Es erklärt das Angebot, qualifiziert den Lead und führt ihn zur Handlung, auf der Website, in den Anzeigen und per E-Mail. Und zugleich <strong>baut es die Marke auf</strong>: Eine Organisation, die sich mit dem Standard des Kinos präsentiert, trägt Glaubwürdigkeit in jeden Kontakt, vom ersten Besuch bis zum Abschluss. Der Inhalt verbraucht sich nicht in einer Kampagne: Er bleibt das zentrale Asset der kommerziellen Kommunikation, auf allen Kanälen im Einsatz.",
+    's4.c1':"Website / Landing",'s4.c2':"LinkedIn",'s4.c3':"Ads",'s4.c4':"E-Mail",
+    'n5':"05 · DAS SYSTEM",'s5.k':"Was wir liefern",
+    's5.h':"Ein zentrales Werk, <em>in Ebenen gebaut</em>.",
+    's5.c1':"Der Kern",'s5.c2':"Für den nächsten Schritt",
+    's5.m1':"Drehbuch & Botschaftsstruktur",'s5.m2':"Imagefilm",'s5.m3':"VSL (Video Sales Letter)",'s5.m4':"Filmischer Dreh",
+    's5.m5':"Art Direction",'s5.m6':"Versionen pro Kanal",'s5.m7':"Kurzversionen für Social Media",
+    's5.note':"Wir wählen gemeinsam mit Ihnen das richtige Paket für Ihre Organisation. Nichts wird auferlegt. Klicken Sie auf jede Ebene, um sie kennenzulernen, oder <a href='#s13'>sehen Sie sich die Pakete an →</a>",
+    'n6':"06 · DREHBUCH",'s6.k':"Drehbuch und Botschaftsstruktur",
+    's6.h':"70 % des Ergebnisses <em>entstehen vor dem Dreh</em>.",
+    's6.b':"Alles beginnt mit dem Schreiben: ein Drehbuch, das auf Klarheit und Aufmerksamkeit ausgelegt ist, und eine Botschaftsstruktur, die ordnet, was Ihre Organisation tut, für wen und warum. Dieses Dokument ist mehr wert als das Video: Es dient der internen Abstimmung und wird zur Quelle der Botschaft in allen kommerziellen Materialien.<br><br>Es ist die Phase mit dem größten Gewicht am Endergebnis und das Tor der Produktion: <strong>kein Dreh startet ohne schriftlich freigegebenes Drehbuch</strong>. Das garantiert, dass das fertige Werk genau das sagt, was es sagen muss.",
+    'n7':"07 · IMAGEFILM",'s7.k':"Imagefilm",
+    's7.h':"Kein Firmenvideo. Ein <em>Film</em>.",
+    's7.b':"Das Hauptwerk der Kommunikation Ihrer Organisation, produziert nach den Maßstäben des Kinos: ein Team mit Regie, Bildgestaltung, Ton und Art Direction, und Postproduktion mit Farbkorrektur und redaktioneller Absicht: erzählerischer Aufbau, Rhythmus und die richtige Geschichte für das richtige Publikum.<br><br>Er präsentiert die Organisation, das Produkt oder den Service mit der Glaubwürdigkeit, die der High-Ticket-Markt verlangt. Und er sagt viel über den aus, der ihn zeigt: Eine Marke, die auf diesem Niveau kommuniziert, zeigt, dass sie ernst nimmt, was sie verkauft.",
+    'n7b':"08 · VSL",'s7b.k':"VSL, das Verkaufsvideo",
+    's7b.h':"Das Angebot erklärt, <em>vor dem ersten Call</em>.",
+    's7b.b':"Der VSL (Video Sales Letter) ist eine Art Imagefilm mit einem einzigen Ziel: <strong>konvertieren</strong>. Er führt durch Problem, Lösung und Beweis und endet mit einem klaren Call-to-Action, auf der Website, auf einer Landing Page oder in einer E-Mail-Sequenz.<br><br>Es ist das Werk, das die Fragen beantwortet, die Ihr Vertriebsteam in jedem Call wiederholt: Wenn der Lead ins Gespräch kommt, hat er das Angebot bereits verstanden, und das Gespräch beginnt weiter vorn. Weniger Reibung im Vertrieb, besser qualifizierte Leads und ein kürzerer Verkaufszyklus.",
+    'n8':"09 · DER DREH",'s8.k':"Filmischer Dreh und Art Direction",
+    's8.h':"Ein oder zwei Drehtage, <em>im Detail geplant</em>.",
+    's8.b':"Gedreht wird an einem Tag (Base und Cinema) oder an zwei Tagen und einer Nacht (Personalizado), an einem im Voraus vorbereiteten Ort: Checkliste zur Vorbereitung des Raums, Tagesdisposition und bestätigte Mitwirkende. Wir führen die Menschen Ihrer Organisation vor der Kamera, mit technischen Leitfäden für alle, die sprechen.<br><br>Im Cinema-Paket kommt die <strong>Art Direction</strong> hinzu: Raum, Requisiten und visuelle Details werden für einen Look näher am Kino ausgearbeitet, die Behandlung, die ein Premium-Werk von einem generischen Firmenvideo trennt.",
+    'n10':"10 · KANÄLE",'s10.k':"Versionen pro Kanal",
+    's10.h':"Ein Werk, <em>bereit für jeden Kanal</em>.",
+    's10.b':"Die Lieferung ist nicht eine einzige Datei: Es ist der Master in maximaler Qualität plus Exporte für jedes Ziel, die Website oder Landing Page, LinkedIn und die Anzeigen, mit Nutzungshinweisen, damit Sie genau wissen, welche Datei wohin gehört.<br><br>Dasselbe Video, in Eile für alle Kanäle komprimiert, verliert irgendwo an Qualität; Versionen pro Kanal garantieren, dass sich das Werk überall von seiner besten Seite zeigt. Mit dabei ist die Botschaftsstruktur, die Ihr Team in jedem zukünftigen Material nutzen kann.",
+    'n11':"11 · SOCIAL MEDIA",'s11.k':"Kurzversionen für Social Media",
+    's11.h':"Die Botschaft, <em>multipliziert</em>.",
+    's11.b':"Wenn es sinnvoll ist, über den Hauptkanal hinaus zu verbreiten, erstellen wir Kurzversionen des Werks: Reels, Stories und Shorts, die dieselbe Botschaft in die sozialen Netzwerke tragen, mit Schnitten, die in den ersten Sekunden fesseln.<br><br>Und wenn die Organisation keine eigene Marketingstruktur hat, holen wir Marketingpartner dazu, die Konzept und Distribution entwickeln, je Projekt kalkuliert, damit das Werk nicht ungenutzt auf einer Website liegt.",
+    'n12':"12 · PROZESS",'s12.k':"Wie wir arbeiten",
+    's12.h':"Ein Prozess, ein spezialisiertes Team, <em>ein fester Zeitrahmen</em>.",
+    's12.st1':"<h4>Kick-off</h4><p>Abstimmungsgespräch, Onboarding, Zeitplan mit Ihnen validiert.</p>",
+    's12.st2':"<h4>Schreiben</h4><p>Drehbuch und Botschaftsstruktur, schriftlich freigegeben.</p>",
+    's12.st3':"<h4>Vorproduktion</h4><p>Ort, Team, Tagesdisposition, Vorbereitung des Raums.</p>",
+    's12.st4':"<h4>Dreh</h4><p>1 bis 2 Tage vor Ort. Führung der Mitwirkenden, Backup am selben Tag.</p>",
+    's12.st5':"<h4>Postproduktion</h4><p>Schnitt, Color Grading, Tonmischung, 2 Korrekturrunden.</p>",
+    's12.st6':"<h4>Lieferung</h4><p>Master + Exporte pro Kanal, Nutzungshinweise, Botschaftsstruktur.</p>",
+    's12.badge':"Der 2-bis-3-Wochen-Zyklus<small>vom Kick-off bis zur Lieferung</small>",
+    's12.b':"Der typische Zyklus <strong>dauert 2 bis 3 Wochen</strong>, gerechnet vom Kick-off bis zur Lieferung, mit einem Zeitplan, der gleich zu Beginn mit Ihnen validiert wird. Die Phase, die diesen Service auszeichnet, ist das Schreiben: <strong>kein Dreh startet ohne schriftlich freigegebenes Drehbuch</strong>, denn dort werden 70 % des Ergebnisses entschieden. Projekte mit komplexeren internen Freigaben können bis zu 6 Wochen dauern; bei Dringlichkeit gibt es einen Fast-Track von 1 bis 1,5 Wochen. Sie sprechen einfach direkt mit uns, und wir kümmern uns um alles Nötige.",
+    'n13':"13 · PAKETE",'s13.k':"Pakete",
+    's13.h':"Drei Ausgangspunkte, <em>ein maßgeschneidertes Paket</em>.",
+    's13.tag':"Empfohlen",
+    's13.p1l':"<li>Drehbuch und Botschaftsstruktur</li><li>Regie + Bildgestaltung</li><li>Ton, Schnitt und Color Grading</li><li>1 Drehtag</li><li>Exporte pro Kanal</li>",
+    's13.p1q':"Das Hauptwerk, ohne Szenenkomplexität",
+    's13.p2l':"<li>Alles aus Base</li><li>Art Direction</li><li>Ein Look näher am Kino</li><li>1 Drehtag</li>",
+    's13.p2q':"Für Marken, die den vollen filmischen Standard wollen",
+    's13.p3l':"<li>Alles aus Cinema</li><li>2 Drehtage und 1 Nacht</li><li>Mehrere Szenenbilder</li>",
+    's13.p3q':"Für Projekte mit mehr Umfang und Ambition",
+    's13.note':"Preise zzgl. MwSt., Reisen und Verpflegung des Teams inklusive. Lizenzen, professionelle Schauspieler und kostenpflichtige Locations werden separat kalkuliert; Social-Media-Versionen und Distribution laufen über Marketingpartner, je Projekt kalkuliert. Der endgültige Wert steht im Angebot, das nach dem ersten Kennenlerngespräch versendet wird. <a href='https://cal.com/afterec/discoverycall' target='_blank' rel='noopener'>Kennenlerngespräch vereinbaren →</a>",
+    's14.h':"Ihr Angebot verdient es, <em>verstanden zu werden</em>.",
+    's14.b':"Wir wählen gemeinsam mit Ihnen aus, was Ihre Organisation braucht. In einem kurzen Gespräch verstehen wir, was Sie kommunizieren möchten, und schlagen die passendsten Lösungen vor, um diese Ziele zu erreichen.",
+    's14.btn':"Termin vereinbaren"
+  },
+  da:{
+    's1.sub':"En audiovisuel produktionsservice <span class='subq'>til organisationer og brands.</span>",
+    'n2':"02 · AFTEREC",'s2.k':"Hvem vi er",
+    's2.h':"Vi laver ikke »en virksomhedsvideo«.<br><span class='oneline'>Vi bygger et brands <em>budskab</em>.</span>",
+    's2.b':"AfteREC er et <strong>filmproduktionsselskab</strong>. Vi producerer indhold, der <strong>fastholder seerens opmærksomhed</strong>: gennem fortælling, valg af billeder, lyssætning og art direction. For hver organisation gør vi det klart, hvad der er unikt ved tilbuddet, i et visuelt værk, der bærer troværdighed og vækker lysten til at vide mere. Vi arbejder med <strong>high-ticket organisationer og brands</strong>, B2B og B2C, og disse værker <strong>styrker brandets autoritet og dem, der leder det</strong>.<br><br>Vi koordinerer de bedste fagfolk til hvert projekt og sikrer, at alt, hvad vi producerer, holder et højt kvalitetsniveau. Det, du kan forvente, er ikke blot levering af en video: Det er <strong>opbygningen af din organisations kommercielle budskab</strong>, fra manuskript til færdigt værk, klar til at konvertere på alle kanaler.",
+    'n3':"03 · MARKEDET",
+    's3.sem':"af køberne foretrækker at lære et tilbud at kende <strong>via video</strong>, ikke tekst",
+    's3.semlist':"<li>Uden et centralt værk ændrer budskabet sig fra call til call</li><li>Leads kommer uden at forstå tilbuddet</li><li>Længere salgscyklus</li>",
+    's3.com':"siger, at <strong>en video</strong> overbeviste dem om at købe et produkt eller en service",
+    's3.comlist':"<li>Tilbuddet forklarer sig selv før samtalen</li><li>Leads kommer kvalificerede til callet</li><li>Kortere salgscyklus</li>",
+    's3.fonte':"Kilde: Wyzowl, State of Video Marketing (12 års data).",
+    's3.k':"Hvorfor det betyder noget",
+    's3.h':"Et godt tilbud med et forvirrende budskab <em>konverterer ikke</em>.",
+    's3.b':"Mange organisationer har et godt produkt eller en god service, men et budskab, der er forvirrende, generisk eller spredt ud over materialer, der ikke hænger sammen. Resultatet mærkes i salget: Hvert call starter med at forklare det basale, leads kommer uden at forstå tilbuddet, og salgscyklussen trækker ud.<br><br>Et centralt værk med <strong>filmens sprog, som samtidig fungerer online</strong>, ændrer den positionering: Tilbuddet forklarer sig selv før samtalen, den, der når frem til callet, kommer kvalificeret, og salgsteamet bruger tiden på at lukke, ikke på at forklare. Og vi sørger for, at alt dette sker.",
+    'n4':"04 · AFKASTET",'s4.k':"Én investering, to afkast",
+    's4.h':"Ét værk, der tjener <em>to formål</em>.",
+    's4.b':"Hovedværket <strong>konverterer</strong>: Det forklarer tilbuddet, kvalificerer leadet og driver handling på websitet, i annoncerne og i emailen. Og samtidig <strong>bygger det brandet</strong>: En organisation, der præsenterer sig med filmens standard, bærer troværdighed i hvert kontaktpunkt, fra første besøg til lukning. Indholdet brænder ikke ud i én kampagne: Det forbliver det centrale aktiv i den kommercielle kommunikation og arbejder på alle kanaler.",
+    's4.c1':"Website / Landing",'s4.c2':"LinkedIn",'s4.c3':"Ads",'s4.c4':"Email",
+    'n5':"05 · SYSTEMET",'s5.k':"Hvad vi leverer",
+    's5.h':"Ét centralt værk, <em>bygget i lag</em>.",
+    's5.c1':"Kernen",'s5.c2':"For at gå videre",
+    's5.m1':"Manuskript & budskabsstruktur",'s5.m2':"Virksomhedsfilm",'s5.m3':"VSL (Video Sales Letter)",'s5.m4':"Filmisk optagelse",
+    's5.m5':"Art direction",'s5.m6':"Versioner pr. kanal",'s5.m7':"Korte versioner til sociale medier",
+    's5.note':"Vi vælger sammen med dig den rigtige pakke til din organisation. Intet er påtvunget. Klik på hvert lag for at lære det at kende, eller <a href='#s13'>se pakkerne →</a>",
+    'n6':"06 · MANUSKRIPT",'s6.k':"Manuskript og budskabsstruktur",
+    's6.h':"70 % af resultatet <em>skrives før optagelsen</em>.",
+    's6.b':"Alt starter med skrivningen: et manuskript bygget til klarhed og fastholdelse, og en budskabsstruktur, der organiserer, hvad din organisation gør, for hvem og hvorfor. Dette dokument er mere værd end videoen: Det fungerer som intern afstemning og bliver kilden til budskabet i alt kommercielt materiale.<br><br>Det er fasen med størst vægt i det endelige resultat, og det er produktionens port: <strong>ingen optagelse går i gang uden manuskriptet godkendt på skrift</strong>. Det er det, der garanterer, at det færdige værk siger præcis det, det skal sige.",
+    'n7':"07 · VIRKSOMHEDSFILM",'s7.k':"Virksomhedsfilm",
+    's7.h':"Det er ikke en virksomhedsvideo. Det er en <em>film</em>.",
+    's7.b':"Hovedværket i din organisations kommunikation, produceret efter filmens standarder: et hold med instruktion, fotografering, lyd og art direction, og postproduktion med farvekorrektion og redaktionel intention: narrativ fremdrift, rytme og den rigtige historie til det rigtige publikum.<br><br>Den præsenterer organisationen, produktet eller servicen med den troværdighed, som high-ticket-markedet kræver. Og den siger meget om den, der viser den: Et brand, der kommunikerer på dette niveau, viser, at det tager det, det sælger, alvorligt.",
+    'n7b':"08 · VSL",'s7b.k':"VSL, salgsvideoen",
+    's7b.h':"Tilbuddet forklaret, <em>før det første call</em>.",
+    's7b.b':"En VSL (Video Sales Letter) er en type virksomhedsfilm med ét eneste mål: <strong>at konvertere</strong>. Den går gennem problemet, løsningen og beviset og slutter med en klar opfordring til handling, på websitet, på en landingsside eller i en email-sekvens.<br><br>Det er værket, der besvarer de spørgsmål, dit salgsteam gentager i hvert call: Når leadet når frem til samtalen, har det allerede forstået tilbuddet, og samtalen starter længere fremme. Mindre kommerciel friktion, bedre kvalificerede leads og en kortere salgscyklus.",
+    'n8':"09 · OPTAGELSE",'s8.k':"Filmisk optagelse og art direction",
+    's8.h':"En eller to optagedage, <em>planlagt i detaljen</em>.",
+    's8.b':"Optagelsen foregår på én dag (Base og Cinema) eller to dage og en nat (Personalizado), på et sted forberedt på forhånd: checkliste til klargøring af rummet, dagsplan og bekræftede medvirkende. Vi instruerer din organisations folk foran kameraet, med tekniske guider til dem, der taler.<br><br>I Cinema-pakken kommer <strong>art direction</strong> med: Rummet, rekvisitterne og de visuelle detaljer bearbejdes til et look tættere på film, den behandling, der adskiller et premium-værk fra en generisk virksomhedsvideo.",
+    'n10':"10 · KANALER",'s10.k':"Versioner pr. kanal",
+    's10.h':"Ét værk, <em>klar til hver kanal</em>.",
+    's10.b':"Leveringen er ikke én enkelt fil: Det er masteren i maksimal kvalitet plus eksporter forberedt til hver destination, websitet eller landingssiden, LinkedIn og annoncerne, med brugsanvisning, så du ved præcis, hvilken fil der skal hvorhen.<br><br>Den samme video, der komprimeres i hast til alle kanaler, mister kvalitet et sted; versioner pr. kanal garanterer, at værket viser sig fra sin bedste side overalt. Med følger budskabsstrukturen, som dit team kan bruge i alt fremtidigt materiale.",
+    'n11':"11 · SOCIALE MEDIER",'s11.k':"Korte versioner til sociale medier",
+    's11.h':"Budskabet, <em>multipliceret</em>.",
+    's11.b':"Når det giver mening at distribuere ud over hovedkanalen, skaber vi korte versioner af værket: reels, stories og shorts, der bærer det samme budskab ud på de sociale medier, med klip designet til at fange i de første sekunder.<br><br>Og når organisationen ikke har egen marketingstruktur, inddrager vi marketingpartnere til at skabe konceptet og distributionen, budgetteret fra sag til sag, så værket ikke står stille på et website.",
+    'n12':"12 · PROCES",'s12.k':"Sådan arbejder vi",
+    's12.h':"Én proces, ét specialiseret hold, <em>én deadline</em>.",
+    's12.st1':"<h4>Kick-off</h4><p>Afstemningsmøde, onboarding, kalender valideret med dig.</p>",
+    's12.st2':"<h4>Skrivning</h4><p>Manuskript og budskabsstruktur, godkendt på skrift.</p>",
+    's12.st3':"<h4>Præproduktion</h4><p>Sted, hold, dagsplan, klargøring af rummet.</p>",
+    's12.st4':"<h4>Optagelse</h4><p>1-2 dage på stedet. Instruktion af de medvirkende, backup samme dag.</p>",
+    's12.st5':"<h4>Postproduktion</h4><p>Klipning, color grading, lydmix, 2 revisionsrunder.</p>",
+    's12.st6':"<h4>Levering</h4><p>Master + eksporter pr. kanal, brugsanvisning, budskabsstruktur.</p>",
+    's12.badge':"Cyklussen på 2-3 uger<small>fra kick-off til levering</small>",
+    's12.b':"Den typiske cyklus <strong>varer 2 til 3 uger</strong>, regnet fra kick-off til levering, med kalenderen valideret med dig helt fra start. Fasen, der adskiller denne service, er skrivningen: <strong>ingen optagelse går i gang uden manuskriptet godkendt på skrift</strong>, for det er dér, 70 % af resultatet afgøres. Projekter med mere komplekse interne godkendelser kan tage op til 6 uger; når det haster, findes et fast-track på 1 til 1,5 uge. Du taler bare direkte med os, så tager vi os af det nødvendige.",
+    'n13':"13 · PAKKER",'s13.k':"Pakker",
+    's13.h':"Tre udgangspunkter, <em>én skræddersyet pakke</em>.",
+    's13.tag':"Anbefalet",
+    's13.p1l':"<li>Manuskript og budskabsstruktur</li><li>Instruktion + fotografering</li><li>Lyd, klipning og color grading</li><li>1 optagedag</li><li>Eksporter pr. kanal</li>",
+    's13.p1q':"Hovedværket, uden scenekompleksitet",
+    's13.p2l':"<li>Alt fra Base</li><li>Art direction</li><li>Et look tættere på film</li><li>1 optagedag</li>",
+    's13.p2q':"Til brands, der vil have den fulde filmiske standard",
+    's13.p3l':"<li>Alt fra Cinema</li><li>2 dage og 1 nat med optagelser</li><li>Flere scener</li>",
+    's13.p3q':"Til projekter med større skala og ambition",
+    's13.note':"Priser ekskl. moms, med holdets transport og forplejning inkluderet. Licenser, professionelle skuespillere og betalte locations budgetteres separat; versioner til sociale medier og distribution involverer marketingpartnere, budgetteret fra sag til sag. Den endelige pris fremgår af tilbuddet, der sendes efter det første afklarende møde. <a href='https://cal.com/afterec/discoverycall' target='_blank' rel='noopener'>Book et afklarende møde →</a>",
+    's14.h':"Dit tilbud fortjener at blive <em>forstået</em>.",
+    's14.b':"Vi vælger sammen med dig, hvad din organisation har brug for. På et kort møde forstår vi, hvad du vil kommunikere, og foreslår de løsninger, der passer bedst til at nå de mål.",
+    's14.btn':"Book et møde"
+  },
+  ja:{
+    's1.sub':"組織とブランドのための<span class='subq'>映像制作サービス。</span>",
+    'n2':"02 · AFTEREC",'s2.k':"私たちについて",
+    's2.h':"「ただの企業動画」は作りません。<br><span class='oneline'>ブランドの<em>メッセージ</em>を築きます。</span>",
+    's2.b':"AfteRECは<strong>映画制作会社</strong>です。ナラティブ、カメラワーク、照明、美術を通じて、<strong>視聴者の心をつかむ</strong>コンテンツを制作します。それぞれの組織について、そのオファーの何が唯一無二なのかを明確にし、信頼を支え、もっと知りたくなる映像作品として表現します。<strong>ハイエンドな組織とブランド</strong>（B2B・B2C）と仕事をしており、これらの作品は<strong>ブランドとそれを率いる人々の権威を強化</strong>します。<br><br>各プロジェクトに最適なプロフェッショナルをコーディネートし、制作するすべてが高い品質水準を保つことを保証します。お届けするのは単なる動画ではありません。脚本から完成作品まで、あらゆるチャネルでコンバージョンを生む、<strong>貴社の商業メッセージの構築</strong>です。",
+    'n3':"03 · 市場",
+    's3.sem':"の購入者が、オファーを知るなら文章より<strong>動画</strong>を好む",
+    's3.semlist':"<li>中心となる作品がないと、メッセージがcallごとに変わる</li><li>リードがオファーを理解しないまま到達する</li><li>販売サイクルが長引く</li>",
+    's3.com':"が、<strong>動画</strong>がきっかけで商品やサービスの購入を決めたと回答",
+    's3.comlist':"<li>会話の前にオファーが自ら語る</li><li>リードが確度の高い状態でcallに臨む</li><li>販売サイクルが短くなる</li>",
+    's3.fonte':"出典：Wyzowl, State of Video Marketing（12年間のデータ）。",
+    's3.k':"なぜ重要か",
+    's3.h':"良いオファーも、メッセージが曖昧なら<em>売れません</em>。",
+    's3.b':"多くの組織は良い商品やサービスを持ちながら、メッセージが曖昧で、ありきたりで、資料ごとにバラバラです。その結果は営業に現れます。毎回のcallが基本の説明から始まり、リードはオファーを理解しないまま到達し、販売サイクルは長引きます。<br><br><strong>オンラインでも機能する映画の言語</strong>で作られた中心的な一本が、そのポジショニングを変えます。オファーは会話の前に伝わり、callに来る人はすでに確度が高く、営業チームは説明ではなくクロージングに時間を使えます。私たちはそのすべてが実現することをお約束します。",
+    'n4':"04 · リターン",'s4.k':"一つの投資、二つのリターン",
+    's4.h':"一つの作品が<em>二つの目的</em>を果たします。",
+    's4.b':"メインの作品は<strong>コンバージョンを生みます</strong>。オファーを説明し、リードを見極め、ウェブサイト、広告、メールで行動へ導きます。同時に<strong>ブランドを築きます</strong>。映画の水準で自らを提示する組織は、最初の訪問からクロージングまで、あらゆる接点で信頼を支えます。コンテンツは一つのキャンペーンで使い切りにはなりません。商業コミュニケーションの中心資産として、すべてのチャネルで働き続けます。",
+    's4.c1':"ウェブサイト / LP",'s4.c2':"LinkedIn",'s4.c3':"広告",'s4.c4':"メール",
+    'n5':"05 · システム",'s5.k':"私たちが届けるもの",
+    's5.h':"中心となる一本を、<em>レイヤーで築く</em>。",
+    's5.c1':"コア",'s5.c2':"さらにその先へ",
+    's5.m1':"脚本とメッセージ構造",'s5.m2':"企業フィルム",'s5.m3':"VSL（動画セールスレター）",'s5.m4':"シネマティック撮影",
+    's5.m5':"美術（アートディレクション）",'s5.m6':"チャネル別バージョン",'s5.m7':"SNS向けショートバージョン",
+    's5.note':"貴社に合ったパッケージを、お客様と一緒に選びます。押し付けは一切ありません。各レイヤーをクリックして詳細をご覧いただくか、<a href='#s13'>パッケージをご覧ください →</a>",
+    'n6':"06 · 脚本",'s6.k':"脚本とメッセージ構造",
+    's6.h':"結果の70%は、<em>撮影の前に書かれます</em>。",
+    's6.b':"すべては書くことから始まります。明快さと惹きつける力を狙った脚本と、貴社が何を、誰のために、なぜ行うのかを整理するメッセージ構造。この文書の価値は動画にとどまりません。社内のすり合わせに役立ち、あらゆる商業資料のメッセージの源泉になります。<br><br>最終結果に最も大きな重みを持つフェーズであり、制作のゲートでもあります。<strong>書面で承認された脚本なしに撮影は始まりません</strong>。それが、完成した作品が伝えるべきことを正確に伝える保証です。",
+    'n7':"07 · 企業フィルム",'s7.k':"企業フィルム",
+    's7.h':"企業動画ではなく、<em>映画</em>です。",
+    's7.b':"貴社のコミュニケーションの中心となる作品を、映画の水準で制作します。演出、撮影監督、音声、美術を擁するチームと、カラーグレーディングと編集意図を持つポストプロダクション。物語の展開、リズム、そして正しいオーディエンスへの正しいストーリー。<br><br>組織、商品、サービスを、ハイエンド市場が求める信頼性とともに提示します。そして見せる側について多くを物語ります。この水準でコミュニケーションするブランドは、自らが売るものに本気であることを示します。",
+    'n7b':"08 · VSL",'s7b.k':"VSL、動画セールスレター",
+    's7b.h':"最初のcallの<em>前に、オファーが伝わる</em>。",
+    's7b.b':"VSL（Video Sales Letter）は、目的をただ一つに絞った企業フィルムです。<strong>コンバージョン</strong>。問題、解決策、証拠をたどり、ウェブサイト、ランディングページ、メールシーケンスでの明確な行動喚起で締めくくります。<br><br>営業チームが毎回のcallで繰り返す質問に答える作品です。リードが会話に到達する頃にはオファーを理解しており、会話はその先から始まります。商談の摩擦が減り、リードの確度が上がり、販売サイクルが短くなります。",
+    'n8':"09 · 撮影",'s8.k':"シネマティック撮影と美術",
+    's8.h':"1〜2日の撮影を、<em>細部まで計画して</em>。",
+    's8.b':"撮影は1日（BaseとCinema）または2日と1夜（Personalizado）で、事前に準備された場所で行います。スペース準備のチェックリスト、香盤表、出演者の確定。カメラの前に立つ貴社の方々を私たちがディレクションし、話す人には技術的なガイドを用意します。<br><br>Cinemaパッケージには<strong>美術（アートディレクション）</strong>が加わります。空間、小道具、視覚的なディテールを、より映画に近いルックへと仕上げる、プレミアムな作品とありきたりな企業動画を分ける仕上げです。",
+    'n10':"10 · チャネル",'s10.k':"チャネル別バージョン",
+    's10.h':"一つの作品を、<em>すべてのチャネルに最適化</em>。",
+    's10.b':"納品は1ファイルではありません。最高画質のマスターに加え、ウェブサイトやランディングページ、LinkedIn、広告など、届け先ごとに準備されたエクスポート、そしてどのファイルをどこで使うかが分かる使用ガイドをお渡しします。<br><br>すべてのチャネルに向けて急いで圧縮された同じ動画は、どこかで品質を失います。チャネル別バージョンなら、作品はどこでも最高の姿で表示されます。メッセージ構造も一緒に納品され、貴社のチームが今後のあらゆる資料で使えます。",
+    'n11':"11 · SNS",'s11.k':"SNS向けショートバージョン",
+    's11.h':"メッセージを、<em>増幅する</em>。",
+    's11.b':"メインチャネルを超えて配信する意味がある場合は、作品のショートバージョンを制作します。リール、ストーリーズ、ショート。最初の数秒で惹きつけるカットで、同じメッセージをSNSへ届けます。<br><br>組織にマーケティング体制がない場合は、コンセプトと配信を作るマーケティングパートナーを案件ごとの見積もりで招き、作品がウェブサイトに眠らないようにします。",
+    'n12':"12 · プロセス",'s12.k':"私たちの働き方",
+    's12.h':"一つのプロセス、専門チーム、<em>一つの納期</em>。",
+    's12.st1':"<h4>キックオフ</h4><p>すり合わせのミーティング、オンボーディング、スケジュールの確認。</p>",
+    's12.st2':"<h4>執筆</h4><p>脚本とメッセージ構造を、書面で承認。</p>",
+    's12.st3':"<h4>プリプロダクション</h4><p>ロケ地、チーム、香盤表、スペースの準備。</p>",
+    's12.st4':"<h4>撮影</h4><p>現地で1〜2日。出演者のディレクション、当日バックアップ。</p>",
+    's12.st5':"<h4>ポストプロダクション</h4><p>編集、カラーグレーディング、音声ミックス、2回の修正ラウンド。</p>",
+    's12.st6':"<h4>納品</h4><p>マスター＋チャネル別エクスポート、使用ガイド、メッセージ構造。</p>",
+    's12.badge':"2〜3週間のサイクル<small>キックオフから納品まで</small>",
+    's12.b':"標準的なサイクルは、キックオフから納品まで<strong>2〜3週間</strong>で、スケジュールは冒頭にお客様と確認します。このサービスを特徴づけるのは執筆のフェーズです。<strong>書面で承認された脚本なしに撮影は始まりません</strong>。結果の70%がそこで決まるからです。社内承認が複雑なプロジェクトは最長6週間。お急ぎの場合は1〜1.5週間のファストトラックもあります。お客様は私たちと直接話すだけで、必要なことはすべて私たちが引き受けます。",
+    'n13':"13 · パッケージ",'s13.k':"パッケージ",
+    's13.h':"三つの出発点から、<em>一つのオーダーメイド</em>へ。",
+    's13.tag':"おすすめ",
+    's13.p1l':"<li>脚本とメッセージ構造</li><li>演出＋撮影監督</li><li>音声、編集、カラーグレーディング</li><li>撮影1日</li><li>チャネル別エクスポート</li>",
+    's13.p1q':"メインの作品を、シンプルなセットで",
+    's13.p2l':"<li>Baseの全内容</li><li>美術（アートディレクション）</li><li>より映画に近いルック</li><li>撮影1日</li>",
+    's13.p2q':"映画水準を余すことなく求めるブランドに",
+    's13.p3l':"<li>Cinemaの全内容</li><li>撮影2日と1夜</li><li>複数のセット</li>",
+    's13.p3q':"より大きなスケールと野心を持つプロジェクトに",
+    's13.note':"価格はVAT別、チームの移動費と食費込み。ライセンス、プロの俳優、有料ロケ地は別途見積もり。SNSバージョンと配信はマーケティングパートナーが関わり、案件ごとに見積もります。最終的な金額は、初回ミーティング後にお送りする提案書に明記されます。<a href='https://cal.com/afterec/discoverycall' target='_blank' rel='noopener'>初回ミーティングを予約 →</a>",
+    's14.h':"貴社のオファーは、<em>理解される</em>に値します。",
+    's14.b':"貴社に必要なものを、一緒に選びます。短いミーティングで、伝えたいことを理解し、その目標を達成するための最適なソリューションをご提案します。",
+    's14.btn':"ミーティングを予約"
+  },
+  zh:{
+    's1.sub':"面向企业与品牌的<span class='subq'>影像制作服务。</span>",
+    'n2':"02 · AFTEREC",'s2.k':"关于我们",
+    's2.h':"我们做的不是“一条宣传片”。<br><span class='oneline'>我们打造品牌的<em>信息</em>。</span>",
+    's2.b':"AfteREC 是一家<strong>电影制作公司</strong>。我们通过叙事、镜头设计、灯光与美术指导，制作<strong>牢牢抓住观众注意力</strong>的内容。对于每一家企业，我们把其产品或服务的独特之处讲清楚，以一部支撑信誉、让人想进一步了解的影像作品呈现。我们与<strong>高客单价的企业与品牌</strong>合作（B2B 与 B2C），这些作品<strong>强化品牌及其领导者的权威</strong>。<br><br>我们为每个项目协调最优秀的专业人士，确保所有产出保持高水准的品质。您可以期待的不只是交付一条视频，而是<strong>为您的企业构建商业信息</strong>：从剧本到成片，随时可在所有渠道促成转化。",
+    'n3':"03 · 市场",
+    's3.sem':"的买家更愿意通过<strong>视频</strong>而非文字了解一项产品或服务",
+    's3.semlist':"<li>没有核心作品，信息在每次沟通中都在变</li><li>线索到达时并不理解产品</li><li>销售周期更长</li>",
+    's3.com':"表示<strong>一条视频</strong>促使他们决定购买某产品或服务",
+    's3.comlist':"<li>沟通之前，产品已经讲清楚了</li><li>线索带着明确意向进入会谈</li><li>销售周期更短</li>",
+    's3.fonte':"来源：Wyzowl, State of Video Marketing（12 年数据）。",
+    's3.k':"为什么重要",
+    's3.h':"好产品，配上含糊的信息，<em>无法转化</em>。",
+    's3.b':"许多企业拥有好的产品或服务，但信息含糊、千篇一律，或散落在互不统一的物料中。后果体现在销售上：每次会谈都从解释基础开始，线索到达时不理解产品，销售周期不断拉长。<br><br>一部以<strong>既有电影语言、又适合线上传播</strong>的核心作品会改变这一定位：产品在会谈之前就讲清楚了，进入会谈的人已带着明确意向，销售团队把时间花在成交上，而不是解释上。而我们确保这一切真正发生。",
+    'n4':"04 · 回报",'s4.k':"一次投入，双重回报",
+    's4.h':"一件作品，服务于<em>两个目的</em>。",
+    's4.b':"核心作品负责<strong>转化</strong>：讲清产品、筛选线索，并在网站、广告与邮件中引导行动。与此同时，它<strong>塑造品牌</strong>：以电影水准呈现自己的企业，在从首次访问到成交的每个接触点上都支撑着信誉。内容不会在一次投放中耗尽：它作为商业传播的核心资产留存下来，在所有渠道持续发挥作用。",
+    's4.c1':"网站 / 落地页",'s4.c2':"LinkedIn",'s4.c3':"广告",'s4.c4':"邮件",
+    'n5':"05 · 体系",'s5.k':"我们交付什么",
+    's5.h':"一件核心作品，<em>分层构建</em>。",
+    's5.c1':"核心",'s5.c2':"更进一步",
+    's5.m1':"剧本与信息结构",'s5.m2':"企业影片",'s5.m3':"VSL（视频销售信）",'s5.m4':"电影级拍摄",
+    's5.m5':"美术指导",'s5.m6':"渠道定制版本",'s5.m7':"社交媒体短版本",
+    's5.note':"我们与您一起选择适合贵企业的套餐，绝不强加。点击任一层级了解详情，或<a href='#s13'>查看套餐 →</a>",
+    'n6':"06 · 剧本",'s6.k':"剧本与信息结构",
+    's6.h':"70% 的成果，<em>在开拍前就已写好</em>。",
+    's6.b':"一切从写作开始：一份追求清晰与吸引力的剧本，和一份梳理贵企业做什么、为谁做、为什么做的信息结构。这份文件的价值超越视频本身：它可用于内部对齐，并成为所有商业物料中信息的源头。<br><br>这是对最终成果影响最大的阶段，也是制作的闸门：<strong>没有书面批准的剧本，拍摄不会开始</strong>。正是这一点保证成片准确说出它该说的内容。",
+    'n7':"07 · 企业影片",'s7.k':"企业影片",
+    's7.h':"不是宣传片，是一部<em>影片</em>。",
+    's7.b':"贵企业传播的核心作品，以电影标准制作：配备导演、摄影指导、声音与美术指导的团队，以及包含调色与编辑意图的后期制作：叙事推进、节奏，以及讲给正确受众的正确故事。<br><br>以高客单价市场所要求的信誉，呈现企业、产品或服务。它也充分说明了呈现者是谁：以这个水准进行传播的品牌，表明它对自己所售之物是认真的。",
+    'n7b':"08 · VSL",'s7b.k':"VSL，视频销售信",
+    's7b.h':"在第一次会谈之前，<em>产品已经讲清楚</em>。",
+    's7b.b':"VSL（Video Sales Letter）是一种目标唯一的企业影片：<strong>转化</strong>。它走过问题、方案与证明，以清晰的行动号召收尾，用于网站、落地页或邮件序列。<br><br>它回答了销售团队在每次会谈中重复的问题：当线索进入对话时，已经理解了产品，对话从更靠前的位置开始。更少的商业摩擦、更高质量的线索和更短的销售周期。",
+    'n8':"09 · 拍摄",'s8.k':"电影级拍摄与美术指导",
+    's8.h':"一到两天的拍摄，<em>规划到每个细节</em>。",
+    's8.b':"拍摄在一天（Base 与 Cinema）或两天一夜（Personalizado）内完成，场地提前准备就绪：场地准备清单、通告单、确认到位的出镜人员。我们在镜头前指导贵企业的成员，并为发言者提供技术指南。<br><br>Cinema 套餐加入<strong>美术指导</strong>：空间、道具与视觉细节被打磨出更接近电影的质感，这正是高端作品与普通宣传片的分水岭。",
+    'n10':"10 · 渠道",'s10.k':"渠道定制版本",
+    's10.h':"一件作品，<em>适配每个渠道</em>。",
+    's10.b':"交付的不是单个文件：而是最高画质的母版，加上为每个目的地准备的导出版本，网站或落地页、LinkedIn 与广告，并附使用说明，让您清楚哪个文件用在哪里。<br><br>同一条视频仓促压缩后投放所有渠道，总会在某处损失画质；渠道定制版本保证作品在任何地方都以最佳状态呈现。信息结构随之一同交付，贵团队可在今后的任何物料中使用。",
+    'n11':"11 · 社交媒体",'s11.k':"社交媒体短版本",
+    's11.h':"信息，<em>倍增传播</em>。",
+    's11.b':"当有必要在主渠道之外分发时，我们制作作品的短版本：Reels、Stories 与 Shorts，以在最初几秒抓住注意力的剪辑，把同样的信息带到社交媒体。<br><br>当企业没有自己的营销团队时，我们引入营销伙伴来打造概念与分发，按项目逐案报价，让作品不会闲置在网站上。",
+    'n12':"12 · 流程",'s12.k':"我们的工作方式",
+    's12.h':"一套流程，一支专业团队，<em>一个交付期限</em>。",
+    's12.st1':"<h4>启动会</h4><p>对齐会议、需求收集、与您确认日程。</p>",
+    's12.st2':"<h4>写作</h4><p>剧本与信息结构，经书面批准。</p>",
+    's12.st3':"<h4>前期筹备</h4><p>场地、团队、通告单、场地准备。</p>",
+    's12.st4':"<h4>拍摄</h4><p>现场1至2天。指导出镜人员，当天备份。</p>",
+    's12.st5':"<h4>后期制作</h4><p>剪辑、调色、混音，2轮修改。</p>",
+    's12.st6':"<h4>交付</h4><p>母版＋渠道导出、使用说明、信息结构。</p>",
+    's12.badge':"2至3周的周期<small>从启动会到交付</small>",
+    's12.b':"标准周期<strong>为2至3周</strong>，从启动会到交付计，日程在一开始就与您确认。让这项服务与众不同的是写作阶段：<strong>没有书面批准的剧本，拍摄不会开始</strong>，因为70%的成果在那里决定。内部审批更复杂的项目最长可达6周；如有紧急需求，可选择1至1.5周的快速通道。您只需直接与我们沟通，其余一切由我们负责。",
+    'n13':"13 · 套餐",'s13.k':"套餐",
+    's13.h':"三个起点，<em>一个量身定制的套餐</em>。",
+    's13.tag':"推荐",
+    's13.p1l':"<li>剧本与信息结构</li><li>导演＋摄影指导</li><li>声音、剪辑与调色</li><li>拍摄1天</li><li>渠道导出版本</li>",
+    's13.p1q':"核心作品，无复杂布景",
+    's13.p2l':"<li>包含 Base 全部内容</li><li>美术指导</li><li>更接近电影的质感</li><li>拍摄1天</li>",
+    's13.p2q':"适合追求完整电影水准的品牌",
+    's13.p3l':"<li>包含 Cinema 全部内容</li><li>拍摄2天1夜</li><li>多个场景</li>",
+    's13.p3q':"适合规模与野心更大的项目",
+    's13.note':"价格不含增值税，含团队差旅与餐饮。授权、职业演员与付费场地另行报价；社交媒体版本与分发由营销伙伴参与，逐案报价。最终价格将在首次沟通会议后发送的方案中列明。<a href='https://cal.com/afterec/discoverycall' target='_blank' rel='noopener'>预约首次会议 →</a>",
+    's14.h':"您的产品，值得被<em>真正理解</em>。",
+    's14.b':"我们与您一起选择贵企业所需的内容。在一次简短的会议中，我们了解您想传达的信息，并建议最合适的方案来实现这些目标。",
+    's14.btn':"预约会议"
+  },
+  ar:{
+    's1.sub':"خدمة إنتاج سمعي بصري <span class='subq'>للمؤسسات والعلامات التجارية.</span>",
+    'n2':"02 · AFTEREC",'s2.k':"من نحن",
+    's2.h':"نحن لا نصنع «مجرد فيديو مؤسسي».<br><span class='oneline'>نحن نبني <em>رسالة</em> العلامة.</span>",
+    's2.b':"AfteREC شركة <strong>إنتاج سينمائي</strong>. ننتج محتوى <strong>يشدّ انتباه المشاهد</strong>: من خلال السرد، واختيار اللقطات، والإضاءة، والإدارة الفنية. لكل مؤسسة، نوضّح ما يجعل عرضها فريدًا، في عمل بصري يرسّخ المصداقية ويجعل المشاهد يرغب في معرفة المزيد. نعمل مع <strong>مؤسسات وعلامات عالية القيمة</strong>، B2B وB2C، وهذه الأعمال <strong>تعزّز سلطة العلامة ومن يقودها</strong>.<br><br>ننسّق أفضل المحترفين لكل مشروع، ونضمن أن كل ما ننتجه يحافظ على مستوى عالٍ من الجودة. ما يمكنكم توقّعه ليس مجرد تسليم فيديو: بل <strong>بناء الرسالة التجارية لمؤسستكم</strong>، من السيناريو إلى العمل النهائي، جاهزة للتحويل عبر كل القنوات.",
+    'n3':"03 · السوق",
+    's3.sem':"من المشترين يفضّلون التعرّف على عرضٍ ما <strong>عبر الفيديو</strong>، لا النص",
+    's3.semlist':"<li>بدون عمل مركزي، تتغيّر الرسالة من مكالمة إلى أخرى</li><li>يصل العميل المحتمل دون فهم العرض</li><li>دورة بيع أطول</li>",
+    's3.com':"يقولون إن <strong>فيديو</strong> أقنعهم بشراء منتج أو خدمة",
+    's3.comlist':"<li>العرض يشرح نفسه قبل المحادثة</li><li>يصل العملاء المحتملون إلى المكالمة مؤهّلين</li><li>دورة بيع أقصر</li>",
+    's3.fonte':"المصدر: Wyzowl, State of Video Marketing (بيانات 12 عامًا).",
+    's3.k':"لماذا هذا مهم",
+    's3.h':"عرض جيد برسالة مشوّشة <em>لا يحقق التحويل</em>.",
+    's3.b':"كثير من المؤسسات لديها منتج أو خدمة جيدة، لكن رسالتها مشوّشة أو عامة أو مبعثرة في مواد لا تتطابق فيما بينها. والنتيجة تظهر في المبيعات: كل مكالمة تبدأ بشرح الأساسيات، ويصل العملاء المحتملون دون فهم العرض، وتطول دورة البيع.<br><br>عمل مركزي <strong>بلغة السينما يعمل في الوقت نفسه عبر الإنترنت</strong> يغيّر هذا التموضع: يشرح العرض نفسه قبل المحادثة، ومن يصل إلى المكالمة يصل مؤهّلًا، ويقضي فريق المبيعات وقته في الإغلاق لا في الشرح. ونحن نضمن أن يتحقق كل ذلك.",
+    'n4':"04 · العائد",'s4.k':"استثمار واحد، عائدان",
+    's4.h':"عمل واحد يخدم <em>غرضين</em>.",
+    's4.b':"العمل الرئيسي <strong>يحوّل</strong>: يشرح العرض، ويؤهّل العميل المحتمل، ويقوده إلى الفعل في الموقع والإعلانات والبريد الإلكتروني. وفي الوقت نفسه <strong>يبني العلامة</strong>: المؤسسة التي تقدّم نفسها بمعايير السينما ترسّخ المصداقية في كل نقطة تواصل، من الزيارة الأولى حتى الإغلاق. ولا يستهلك المحتوى نفسه في حملة واحدة: يبقى الأصل المركزي للتواصل التجاري، عاملًا عبر كل القنوات.",
+    's4.c1':"الموقع / صفحة الهبوط",'s4.c2':"LinkedIn",'s4.c3':"الإعلانات",'s4.c4':"البريد الإلكتروني",
+    'n5':"05 · المنظومة",'s5.k':"ما الذي نسلّمه",
+    's5.h':"عمل مركزي واحد، <em>يُبنى طبقة فوق طبقة</em>.",
+    's5.c1':"الجوهر",'s5.c2':"للذهاب أبعد",
+    's5.m1':"السيناريو وهيكل الرسالة",'s5.m2':"الفيلم المؤسسي",'s5.m3':"VSL، فيديو المبيعات",'s5.m4':"تصوير سينمائي",
+    's5.m5':"الإدارة الفنية",'s5.m6':"نسخ لكل قناة",'s5.m7':"نسخ قصيرة لوسائل التواصل",
+    's5.note':"نختار معكم الباقة المناسبة لمؤسستكم. لا شيء مفروض. انقروا على كل طبقة للتعرّف عليها، أو <a href='#s13'>اطّلعوا على الباقات ←</a>",
+    'n6':"06 · السيناريو",'s6.k':"السيناريو وهيكل الرسالة",
+    's6.h':"70% من النتيجة <em>تُكتب قبل التصوير</em>.",
+    's6.b':"كل شيء يبدأ بالكتابة: سيناريو موجّه نحو الوضوح وشدّ الانتباه، وهيكل رسالة ينظّم ما تفعله مؤسستكم، ولمن، ولماذا. قيمة هذه الوثيقة تتجاوز الفيديو: تصلح للمواءمة الداخلية وتصبح مصدر الرسالة في كل المواد التجارية.<br><br>إنها المرحلة ذات الوزن الأكبر في النتيجة النهائية، وهي بوابة الإنتاج: <strong>لا يبدأ أي تصوير دون سيناريو معتمد خطيًا</strong>. هذا ما يضمن أن يقول العمل النهائي تمامًا ما يجب أن يقوله.",
+    'n7':"07 · الفيلم المؤسسي",'s7.k':"الفيلم المؤسسي",
+    's7.h':"ليس فيديو شركات. إنه <em>فيلم</em>.",
+    's7.b':"العمل الرئيسي لتواصل مؤسستكم، يُنتَج بمعايير السينما: فريق مع إخراج وإدارة تصوير وصوت وإدارة فنية، وما بعد الإنتاج مع تصحيح الألوان ونيّة تحريرية: تصاعد سردي، وإيقاع، والقصة الصحيحة للجمهور الصحيح.<br><br>يقدّم المؤسسة أو المنتج أو الخدمة بالمصداقية التي يطلبها السوق عالي القيمة. ويقول الكثير عمّن يقدّمه: علامة تتواصل بهذا المستوى تُظهر أنها جادة فيما تبيعه.",
+    'n7b':"08 · VSL",'s7b.k':"VSL، فيديو المبيعات",
+    's7b.h':"العرض مشروح، <em>قبل المكالمة الأولى</em>.",
+    's7b.b':"الـVSL (Video Sales Letter) نوع من الفيلم المؤسسي بهدف واحد: <strong>التحويل</strong>. يمرّ بالمشكلة والحل والدليل، وينتهي بدعوة واضحة إلى الفعل، في الموقع أو في صفحة هبوط أو في سلسلة بريد إلكتروني.<br><br>إنه العمل الذي يجيب عن الأسئلة التي يكرّرها فريق المبيعات في كل مكالمة: حين يصل العميل المحتمل إلى المحادثة يكون قد فهم العرض، وتبدأ المحادثة من نقطة أبعد. احتكاك تجاري أقل، وعملاء محتملون أفضل تأهيلًا، ودورة بيع أقصر.",
+    'n8':"09 · التصوير",'s8.k':"التصوير السينمائي والإدارة الفنية",
+    's8.h':"يوم أو يومان من التصوير، <em>مخطّطان بأدق التفاصيل</em>.",
+    's8.b':"يجري التصوير في يوم واحد (Base وCinema) أو يومين وليلة (Personalizado)، في موقع مُجهَّز مسبقًا: قائمة تحضير المكان، وجدول التصوير، ومشاركون مؤكّدون. نوجّه أفراد مؤسستكم أمام الكاميرا، مع أدلة تقنية داعمة لمن يتحدث.<br><br>في باقة Cinema تدخل <strong>الإدارة الفنية</strong>: يُعتنى بالمكان والإكسسوارات والتفاصيل البصرية للوصول إلى مظهر أقرب إلى السينما، اللمسة التي تفصل عملًا فاخرًا عن فيديو مؤسسي عادي.",
+    'n10':"10 · القنوات",'s10.k':"نسخ لكل قناة",
+    's10.h':"عمل واحد، <em>جاهز لكل قناة</em>.",
+    's10.b':"التسليم ليس ملفًا واحدًا: بل النسخة الرئيسية بأعلى جودة مع نسخ مُعدّة لكل وجهة، الموقع أو صفحة الهبوط، وLinkedIn، والإعلانات، مع تعليمات استخدام لتعرفوا تمامًا أي ملف يذهب إلى أين.<br><br>الفيديو نفسه المضغوط على عجل لكل القنوات يفقد الجودة في مكان ما؛ النسخ المخصصة لكل قناة تضمن أن يظهر العمل في أفضل صورة في كل مكان. ويُرفَق معه هيكل الرسالة، ليستخدمه فريقكم في أي مادة مستقبلية.",
+    'n11':"11 · وسائل التواصل",'s11.k':"نسخ قصيرة لوسائل التواصل",
+    's11.h':"الرسالة، <em>مضاعفة</em>.",
+    's11.b':"حين يكون من المنطقي التوزيع خارج القناة الرئيسية، ننشئ نسخًا قصيرة من العمل: ريلز وستوريز وشورتس تحمل الرسالة نفسها إلى وسائل التواصل، بمونتاج مصمّم ليجذب في الثواني الأولى.<br><br>وحين لا تملك المؤسسة هيكل تسويق خاصًا بها، نُشرك شركاء تسويق لابتكار المفهوم والتوزيع، بتسعير لكل حالة على حدة، حتى لا يبقى العمل ساكنًا في موقع إلكتروني.",
+    'n12':"12 · العملية",'s12.k':"كيف نعمل",
+    's12.h':"عملية واحدة، فريق متخصص، <em>موعد واحد</em>.",
+    's12.st1':"<h4>اجتماع الانطلاق</h4><p>اجتماع مواءمة، استبيان تعريفي، جدول زمني نؤكده معكم.</p>",
+    's12.st2':"<h4>الكتابة</h4><p>السيناريو وهيكل الرسالة، معتمدان خطيًا.</p>",
+    's12.st3':"<h4>ما قبل الإنتاج</h4><p>الموقع، الفريق، جدول التصوير، تحضير المكان.</p>",
+    's12.st4':"<h4>التصوير</h4><p>يوم إلى يومين في الموقع. توجيه المشاركين، نسخ احتياطي في اليوم نفسه.</p>",
+    's12.st5':"<h4>ما بعد الإنتاج</h4><p>المونتاج، تصحيح الألوان، مزج الصوت، جولتا مراجعة.</p>",
+    's12.st6':"<h4>التسليم</h4><p>النسخة الرئيسية + نسخ لكل قناة، تعليمات الاستخدام، هيكل الرسالة.</p>",
+    's12.badge':"دورة من أسبوعين إلى ثلاثة<small>من اجتماع الانطلاق حتى التسليم</small>",
+    's12.b':"تستغرق الدورة النموذجية <strong>من أسبوعين إلى ثلاثة أسابيع</strong>، تُحسب من اجتماع الانطلاق حتى التسليم، مع جدول زمني نؤكده معكم منذ البداية. المرحلة التي تميّز هذه الخدمة هي الكتابة: <strong>لا يبدأ أي تصوير دون سيناريو معتمد خطيًا</strong>، لأن 70% من النتيجة تتقرر هناك. المشاريع ذات الموافقات الداخلية الأعقد قد تصل إلى 6 أسابيع؛ وعند الاستعجال يتوفر مسار سريع من أسبوع إلى أسبوع ونصف. يكفي أن تتحدثوا معنا مباشرة ونحن نتكفّل بكل ما يلزم.",
+    'n13':"13 · الباقات",'s13.k':"الباقات",
+    's13.h':"ثلاث نقاط انطلاق، <em>باقة مفصّلة على المقاس</em>.",
+    's13.tag':"موصى بها",
+    's13.p1l':"<li>السيناريو وهيكل الرسالة</li><li>إخراج + إدارة تصوير</li><li>صوت ومونتاج وتصحيح ألوان</li><li>يوم تصوير واحد</li><li>نسخ لكل قناة</li>",
+    's13.p1q':"العمل الرئيسي، دون تعقيد في المشاهد",
+    's13.p2l':"<li>كل ما في Base</li><li>الإدارة الفنية</li><li>مظهر أقرب إلى السينما</li><li>يوم تصوير واحد</li>",
+    's13.p2q':"للعلامات التي تريد المعيار السينمائي الكامل",
+    's13.p3l':"<li>كل ما في Cinema</li><li>يومان وليلة من التصوير</li><li>مشاهد متعددة</li>",
+    's13.p3q':"للمشاريع الأكبر حجمًا وطموحًا",
+    's13.note':"الأسعار لا تشمل ضريبة القيمة المضافة، وتشمل تنقلات الفريق ووجباته. التراخيص والممثلون المحترفون والمواقع المدفوعة تُسعَّر على حدة؛ نسخ وسائل التواصل والتوزيع يشارك فيها شركاء تسويق، بتسعير لكل حالة. تُحدَّد القيمة النهائية في العرض المُرسَل بعد الاجتماع التعارفي الأول. <a href='https://cal.com/afterec/discoverycall' target='_blank' rel='noopener'>حجز اجتماع تعارفي ←</a>",
+    's14.h':"عرضكم يستحق أن <em>يُفهَم</em>.",
+    's14.b':"نختار معكم ما تحتاجه مؤسستكم. في اجتماع قصير، نفهم ما تريدون إيصاله ونقترح الحلول الأنسب لتحقيق تلك الأهداف.",
+    's14.btn':"حجز اجتماع"
+  }};
+  const TITLES={pt:"AfteREC Corporate — Apresentação do Serviço",en:"AfteREC Corporate — Service Presentation",es:"AfteREC Corporate — Presentación del Servicio",it:"AfteREC Corporate — Presentazione del Servizio",de:"AfteREC Corporate — Service-Präsentation",da:"AfteREC Corporate — Servicepræsentation",ja:"AfteREC Corporate — サービス紹介",zh:"AfteREC Corporate — 服务介绍",ar:"AfteREC Corporate — عرض الخدمة"};
+  const ARROWT={pt:"Continuar",en:"Continue",es:"Continuar",it:"Continua",de:"Weiter",da:"Fortsæt",ja:"次へ",zh:"继续",ar:"متابعة"};
+  const BACK_TR={en:"← All layers",es:"← Todas las capas",it:"← Tutti i livelli",de:"← Alle Ebenen",da:"← Alle lag",ja:"← 全体一覧",zh:"← 全部内容",ar:"← كل المكوّنات"};
+  const L10N_EL={},L10N_PT={};
+  Object.entries(L10N_MAP).forEach(([k,sel])=>{const el=document.querySelector(sel);if(el){L10N_EL[k]=el;L10N_PT[k]=el.innerHTML}});
+  const backs=[...document.querySelectorAll('a.back')];
+  const BACK_PT=backs.length?backs[0].innerHTML:'';
+  const langBox=document.getElementById('lang');
+  const langCode=document.getElementById('langCode');
+  const langOpts=[...langBox.querySelectorAll('.lang-menu button')];
+  function setLang(l){
+    if(!LANGS.includes(l))l='pt';
+    const d=I18N[l]||{};
+    const rtl=(l==='ar');
+    Object.keys(L10N_EL).forEach(k=>{const el=L10N_EL[k];el.innerHTML=(l!=='pt'&&d[k])?d[k]:L10N_PT[k];if(rtl){el.setAttribute('dir','rtl')}else{el.removeAttribute('dir')}});
+    backs.forEach(b=>{b.innerHTML=(l!=='pt'&&BACK_TR[l])?BACK_TR[l]:BACK_PT});
+    document.documentElement.lang=(l==='pt')?'pt-PT':l;
+    document.title=TITLES[l]||TITLES.pt;
+    arrow.title=ARROWT[l]||ARROWT.pt;
+    langCode.textContent=l.toUpperCase();
+    langOpts.forEach(o=>o.classList.toggle('active',o.dataset.lang===l));
+    try{localStorage.setItem('afterec_lang',l)}catch(e){}
+  }
+  document.getElementById('langBtn').addEventListener('click',e=>{e.stopPropagation();langBox.classList.toggle('open')});
+  langOpts.forEach(o=>o.addEventListener('click',()=>{setLang(o.dataset.lang);langBox.classList.remove('open')}));
+  document.addEventListener('click',e=>{if(!langBox.contains(e.target))langBox.classList.remove('open')});
+  let initLang='pt';
+  try{
+    const q=new URLSearchParams(location.search).get('lang');
+    const s=localStorage.getItem('afterec_lang');
+    initLang=LANGS.includes(q)?q:(LANGS.includes(s)?s:'pt');
+  }catch(e){}
+  setLang(initLang);
+</script>
+</body>
+</html>
