@@ -144,7 +144,14 @@
   .statement{background:var(--bg)}
   .statement .content{max-width:1040px;padding:0 2rem;text-align:center}
   .statement p.body{margin:0 auto}
-  .deco{display:block;margin:1.2rem auto 0;width:min(11vw,150px);height:auto;opacity:.9}
+  .deco{display:none}
+  .side-deco{position:absolute;top:50%;transform:translateY(-50%);width:min(17vw,300px);height:auto;opacity:.42;pointer-events:none;z-index:1}
+  .side-deco.l{left:2.2vw}
+  .side-deco.r{right:2.2vw}
+  @media(max-width:860px){
+    .side-deco{display:none}
+    .deco{display:block;margin:1.4rem auto 0;width:min(34vw,150px);height:auto;opacity:.9}
+  }
   .oneline{white-space:nowrap}
   @media(max-width:900px){.oneline{white-space:normal}}
   /* ---------- menu slide ---------- */
@@ -370,6 +377,8 @@
 
   <!-- 02 · O QUE É A AFTEREC -->
   <section class="slide statement" id="s2">
+    <img class="side-deco l" src="img/deco-perche.png" alt="">
+    <img class="side-deco r" src="img/deco-corporate.png" alt="">
     <div class="num">02 · A AFTEREC</div>
     <div class="content">
       <div class="kicker">Quem somos</div>
@@ -627,6 +636,8 @@
 
   <!-- 11 · CTA -->
   <section class="slide statement cta" id="s14">
+    <img class="side-deco l" src="img/deco-camera.png" alt="">
+    <img class="side-deco r" src="img/deco-claquete.png" alt="">
     <div class="content">
       <h2>Uma boa oferta merece ser <em>bem contada</em>.</h2>
       <p class="body" style="margin:0 auto">Escolhemos consigo o que a sua empresa ou marca precisa. Numa breve reunião, percebemos o que pretende comunicar e sugerimos as soluções mais adequadas para atingir esses objetivos.</p>
